@@ -6,7 +6,7 @@
 /*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:26:50 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/15 12:38:33 by fnikzad          ###   ########.fr       */
+/*   Updated: 2024/05/15 13:25:27 by fnikzad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ typedef struct s_map_data
 	char	*we_tex;
 	int		c_color;
 	int		f_color;
+	int		start_px;
+	int		start_py;
+	int		map_size;
 }	t_map_data;
 
 
@@ -44,10 +47,18 @@ typedef struct s_cub
 	t_map_data	*data;
 }	t_cub;
 
+typedef struct s_parser
+{
+	int		inside_map;
+	int		map_size;
+	int		map_capacity;
+}	t_parser;
 
 // Parser
 int		parser(int argc, char **argv, t_map_data *data);
-int		parse_map_line(char *line, t_map_data *data);
+int		parse_map_file_line(char *line, t_map_data *data, t_parser *parser);
+int		parse_map_line(char *line, t_map_data *data, t_parser *parser);
+
 
 // Utils
 int		put_error(char *str, int i);

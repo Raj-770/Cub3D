@@ -6,13 +6,12 @@
 /*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 12:32:46 by fnikzad           #+#    #+#             */
-/*   Updated: 2024/05/15 12:58:34 by fnikzad          ###   ########.fr       */
+/*   Updated: 2024/05/15 13:27:12 by fnikzad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-char map[10][10] = {{"11111111111111111"}, {"10000000000000001"}, {"10100000100000101"}, {"10000000000000001"}, {"10001000100010001"}, {"11111111111111111"}};
 
 int32_t ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
 {
@@ -48,7 +47,7 @@ void	display(t_cub *game)
 
 void	drawMap2D(t_cub *game)
 {
-	int color;
+	// int color;
 	int	x = 0;
 	int y = 0;
 	int xo;
@@ -59,12 +58,12 @@ void	drawMap2D(t_cub *game)
 		x = 0;
 		while (x < game->mapX)
 		{
-			if (map[y * game->mapX + x] == 1)
-			{
-				color = ft_pixel(255, 255, 255, 255);
-			}
-			else
-				color = ft_pixel(0, 0, 0, 255);
+			// if (map[y * game->mapX + x] == 1)
+			// {
+			// 	color = ft_pixel(255, 255, 255, 255);
+			// }
+			// else
+			// 	color = ft_pixel(0, 0, 0, 255);
 			xo = x * game->mapX;
 			yo = y * game->mapY;
 			x++;

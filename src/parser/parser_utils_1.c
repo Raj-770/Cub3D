@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:18:00 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/14 18:36:19 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/05/15 12:36:44 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	parse_textures_and_colors(char *line, t_id *id, t_map_data *data);
 static int	parse_color(char *line, t_id *id, t_map_data *data);
 static void	initialize_identifiers(t_id *identifiers);
 
-int	parse_map_line(char *line, t_map_data *data)
+int	parse_map_file_line(char *line, t_map_data *data, t_parser *parser)
 {
 	t_id	identifiers[6];
 	int		i;
@@ -33,11 +33,18 @@ int	parse_map_line(char *line, t_map_data *data)
 	{
 		if (ft_strncmp(line, identifiers[i].prefix, identifiers[i].length) == 0)
 		{
-			parse_textures_and_colors(line, &identifiers[i], data);
-			break ;
+			if (!parse_textures_and_colors(line, &identifiers[i], data))
+				return (0);
+			return (1);
 		}
 		i++;
 	}
+	if (line[0] == '\0' && !parser->inside_map)
+		return (1);
+	else if (line[0] == '\0' && parser->inside_map)
+		return (put_error("Empty Line inside map", 0));
+	else
+		return (parse_map_line(line, data, parser));
 	return (1);
 }
 
@@ -48,7 +55,7 @@ static int	parse_textures_and_colors(char *line, t_id *id, t_map_data *data)
 	line += id->length;
 	if (id->length == 3)
 	{
-		texture_path = ft_strdup(line);
+		texture_path = ft_strtrim(line, " ");
 		if (ft_strcmp(id->prefix, "NO ") == 0)
 			data->no_tex = texture_path;
 		else if (ft_strcmp(id->prefix, "SO ") == 0)

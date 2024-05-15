@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 14:22:08 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/14 18:28:47 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/05/15 12:36:03 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static int	check_for_file_extension(char *str);
 static int	parse_map_file(char *path, t_map_data *data);
+static void	initialize_parser(t_parser *parser);
 
 int	parser(int argc, char **argv, t_map_data *data)
 {
@@ -43,7 +44,9 @@ static int	parse_map_file(char *path, t_map_data *data)
 	int		fd;
 	char	*line;
 	char	*temp;
+	t_parser	parser;
 
+	initialize_parser(&parser);
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
 		return (put_error("Unable to open file", 0));
@@ -53,7 +56,7 @@ static int	parse_map_file(char *path, t_map_data *data)
 		if (!line)
 			break ;
 		temp = ft_strtrim(line, "\n");
-		if (!parse_map_line(temp, data))
+		if (!parse_map_file_line(temp, data, &parser))
 		{
 			close(fd);
 			return (free(line), free(temp), 0);
@@ -63,4 +66,11 @@ static int	parse_map_file(char *path, t_map_data *data)
 	}
 	close(fd);
 	return (1);
+}
+
+static void	initialize_parser(t_parser *parser)
+{
+	parser->inside_map = 0;
+	parser->map_capacity = 10;
+	parser->map_size = 0;
 }

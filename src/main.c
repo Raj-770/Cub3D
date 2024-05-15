@@ -6,7 +6,7 @@
 /*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:28:03 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/15 12:42:29 by fnikzad          ###   ########.fr       */
+/*   Updated: 2024/05/15 13:26:21 by fnikzad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ int	main(int argc, char **argv)
 	t_map_data	map_data;
 	t_cub		game;
 
-
 	init(&game);
 	if (!parser(argc, argv, &map_data))
-		return (0);
+		return (free_map_data(&map_data), 0);
 	game.data = &map_data;
-	// game.data->map = 
 	display(&game);
+	for (int i = 0; i < map_data.map_size; i++)
+		printf("%s\n", map_data.map[i]);
 	free_map_data(&map_data);
 	mlx_loop_hook(game.mlx_ptr, drawPlayer, &game);
 	mlx_loop_hook(game.mlx_ptr, ft_hook, &game);
@@ -32,9 +32,4 @@ int	main(int argc, char **argv)
 	return (0);
 }
 
-// printf("NO: %s\n", map_data.no_tex);
-// printf("SO: %s\n", map_data.so_tex);
-// printf("EA: %s\n", map_data.ea_tex);
-// printf("WE: %s\n", map_data.we_tex);
-// printf("C: %d\n", map_data.c_color);
-// printf("F: %d\n", map_data.f_color);
+
