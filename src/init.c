@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 12:32:46 by fnikzad           #+#    #+#             */
-/*   Updated: 2024/05/15 15:09:15 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/05/15 15:15:09 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void	init(t_cub *game)
 	game->player = malloc(sizeof(t_player));
 	game->player->px = 20;
 	game->player->py = 20;
-
 	game->mlx_ptr = mlx_init(1920, 1080, "cub3d", true);
 }
 
