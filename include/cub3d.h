@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:26:50 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/15 15:05:12 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/05/15 15:10:18 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,18 @@
 # include <libft.h>
 # include <MLX42.h>
 # include <get_next_line.h>
+
+#define PI 3.1415926535
+
+typedef struct s_player
+{
+	int		px;
+	int		py;
+	float	pdx;
+	float	pdy;
+	float	p_a;
+}	t_player;
+
 
 typedef struct s_map_data
 {
@@ -32,6 +44,15 @@ typedef struct s_map_data
 	int		start_py;
 	int		map_size;
 }	t_map_data;
+
+
+typedef struct s_cub
+{
+	t_player	*player;
+	mlx_t		*mlx_ptr;
+	mlx_image_t	*mlx_img;
+	t_map_data	*data;
+}	t_cub;
 
 typedef struct s_parser
 {
@@ -57,5 +78,15 @@ void	free_map_data(t_map_data *data);
 // Init
 void	init_map_data(t_map_data *data);
 void	initialize_parser(t_parser *parser);
+
+//init
+void	drawPlayer(void *param);
+void	ft_hook(void* param);
+void	display(t_cub *game);
+void	init(t_cub *game);
+
+void	drawMap2D(void *param);
+void	draw_square(void *mlx_img, int start_x, int start_y, int size, int color);
+int32_t ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 
 #endif
