@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:28:03 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/14 18:39:01 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/05/15 13:17:25 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,11 @@ int	main(int argc, char **argv)
 
 	atexit(leaks);
 	if (!parser(argc, argv, &map_data))
-		return (0);
+		return (free_map_data(&map_data), 0);
+	for (int i = 0; i < map_data.map_size; i++)
+		printf("%s\n", map_data.map[i]);
 	free_map_data(&map_data);
 	return (0);
 }
 
-// printf("NO: %s\n", map_data.no_tex);
-// printf("SO: %s\n", map_data.so_tex);
-// printf("EA: %s\n", map_data.ea_tex);
-// printf("WE: %s\n", map_data.we_tex);
-// printf("C: %d\n", map_data.c_color);
-// printf("F: %d\n", map_data.f_color);
+
