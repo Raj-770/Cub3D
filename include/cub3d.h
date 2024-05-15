@@ -6,7 +6,7 @@
 /*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:26:50 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/15 13:25:27 by fnikzad          ###   ########.fr       */
+/*   Updated: 2024/05/15 14:56:06 by fnikzad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,17 @@
 # include <libft.h>
 # include <MLX42.h>
 # include <get_next_line.h>
+
+#define PI 3.1415926535
+
+typedef struct s_player
+{
+	int		px;
+	int		py;
+	float	pdx;
+	float	pdy;
+	float	p_a;
+}	t_player;
 
 
 typedef struct s_map_data
@@ -37,11 +48,7 @@ typedef struct s_map_data
 
 typedef struct s_cub
 {
-	int	px;
-	int	py;
-	int	mapX;
-	int	mapY;
-
+	t_player	*player;
 	mlx_t		*mlx_ptr;
 	mlx_image_t	*mlx_img;
 	t_map_data	*data;
@@ -70,6 +77,11 @@ void	drawPlayer(void *param);
 void	ft_hook(void* param);
 void	display(t_cub *game);
 void	init(t_cub *game);
+
+void	drawMap2D(void *param);
+void	draw_square(void *mlx_img, int start_x, int start_y, int size, int color);
+int32_t ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
+
 
 
 
