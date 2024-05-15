@@ -1,33 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/11 16:28:03 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/15 14:26:43 by rpambhar         ###   ########.fr       */
+/*   Created: 2024/05/15 14:01:21 by rpambhar          #+#    #+#             */
+/*   Updated: 2024/05/15 15:02:46 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	leaks(void)
+void	init_map_data(t_map_data *data)
 {
-	system("leaks Cub3D");
+	data->c_color = 0;
+	data->f_color = 0;
+	data->map = NULL;
+	data->map_size = 0;
+	data->start_px = 0;
+	data->start_py = 0;
+	data->no_tex = NULL;
+	data->so_tex = NULL;
+	data->ea_tex = NULL;
+	data->we_tex = NULL;
 }
 
-int	main(int argc, char **argv)
+void	initialize_parser(t_parser *parser)
 {
-	t_map_data	map_data;
-
-	atexit(leaks);
-	init_map_data(&map_data);
-	if (!parser(argc, argv, &map_data))
-		return (free_map_data(&map_data), 0);
-	for (int i = 0; i < map_data.map_size; i++)
-		printf("%s\n", map_data.map[i]);
-	free_map_data(&map_data);
-	return (0);
+	parser->line = NULL;
+	parser->trimed_line = NULL;
+	parser->inside_map = 0;
+	parser->map_capacity = 10;
+	parser->map_size = 0;
 }
 

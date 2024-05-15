@@ -26,6 +26,7 @@ HEADER	:= include/cub3d.h
 SRCS	:=	lib/get_next_line/get_next_line.c \
 			lib/get_next_line/get_next_line_utils.c \
 			src/main.c \
+			src/init.c \
 			src/parser/parser.c \
 			src/parser/parser_utils_1.c \
 			src/parser/parser_utils_2.c \

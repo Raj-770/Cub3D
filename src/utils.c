@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:18:46 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/15 13:18:40 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/05/15 14:27:11 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,10 @@ void	free_map_data(t_map_data *data)
 	free(data->we_tex);
 	data->c_color = 0;
 	data->f_color = 0;
-
 	if (data->map)
 	{
 		i = 0;
-		while (data->map[i])
+		while (i < data->map_size)
 		{
 			free(data->map[i]);
 			i++;

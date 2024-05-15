@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:26:50 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/15 13:16:39 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/05/15 15:05:12 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ typedef struct s_map_data
 
 typedef struct s_parser
 {
+	char	*line;
+	char	*trimed_line;
+	int		fd;
 	int		inside_map;
 	int		map_size;
 	int		map_capacity;
@@ -44,11 +47,15 @@ typedef struct s_parser
 int		parser(int argc, char **argv, t_map_data *data);
 int		parse_map_file_line(char *line, t_map_data *data, t_parser *parser);
 int		parse_map_line(char *line, t_map_data *data, t_parser *parser);
-
+int		check_map_rules(t_map_data *data);
 
 // Utils
 int		put_error(char *str, int i);
 void	free_array(char **array);
 void	free_map_data(t_map_data *data);
+
+// Init
+void	init_map_data(t_map_data *data);
+void	initialize_parser(t_parser *parser);
 
 #endif
