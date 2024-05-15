@@ -28,6 +28,7 @@ SRCS	:=	lib/get_next_line/get_next_line.c \
 			src/main.c \
 			src/init.c \
 			src/draw_map.c\
+			src/draw_rays.c\
 			src/parser/parser.c \
 			src/parser/parser_utils_1.c \
 			src/parser/parser_utils_2.c \

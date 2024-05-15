@@ -6,18 +6,16 @@
 /*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 14:53:56 by fnikzad           #+#    #+#             */
-/*   Updated: 2024/05/15 18:44:20 by fnikzad          ###   ########.fr       */
+/*   Updated: 2024/05/15 19:21:38 by fnikzad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-
 int32_t ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
 {
 	return (r << 24 | g << 16 | b << 8 | a);
 }
-
 
 void	draw_square(void *mlx_img, int start_x, int start_y, int size, int color)
 {
@@ -62,8 +60,6 @@ void mlx_draw_line(void *mlx_img, int x0, int y0, int x1, int y1, int color)
 	}
 }
 
-
-
 void	drawMap2D(void *param)
 {
 	t_cub *game = param;
@@ -73,7 +69,7 @@ void	drawMap2D(void *param)
 	int y = 0;
 
 	mlx_delete_image(game->mlx_ptr, game->mlx_img);
-	game->mlx_img = mlx_new_image(game->mlx_ptr, 1920, 1080);
+	game->mlx_img = mlx_new_image(game->mlx_ptr, WIDTH, HEIGHT);
 	mlx_image_to_window(game->mlx_ptr, game->mlx_img, 0, 0);
 	while (y < game->data->map_size)
 	{

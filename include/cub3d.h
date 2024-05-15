@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:26:50 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/15 15:15:45 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/05/15 19:09:32 by fnikzad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,22 @@
 # include <get_next_line.h>
 
 #define PI 3.1415926535
+#define WIDTH 1920
+#define HEIGHT 1080
+
+typedef struct s_ray
+{
+	int		r;
+	int		mx;
+	int		my;
+	int		mp;
+	int		dof;
+	float	rx;
+	float	ry;
+	float	ra;
+	float	xo;
+	float	yo;
+}	t_ray;
 
 typedef struct s_player
 {
@@ -50,6 +66,7 @@ typedef struct s_cub
 {
 	t_player	*player;
 	mlx_t		*mlx_ptr;
+	t_ray		ray;
 	mlx_image_t	*mlx_img;
 	t_map_data	*data;
 }	t_cub;
@@ -80,13 +97,15 @@ void	init_map_data(t_map_data *data);
 void	initialize_parser(t_parser *parser);
 
 //init
-void	drawPlayer(void *param);
 void	ft_hook(void* param);
 void	display(t_cub *game);
 void	init(t_cub *game);
 
 void	drawMap2D(void *param);
 void	draw_square(void *mlx_img, int start_x, int start_y, int size, int color);
-int32_t ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
+int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
+
+void	draw_rays(t_cub *game);
+
 
 #endif
