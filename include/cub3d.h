@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:26:50 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/14 18:38:24 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/05/15 12:38:33 by fnikzad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <MLX42.h>
 # include <get_next_line.h>
 
+
 typedef struct s_map_data
 {
 	char	**map;
@@ -30,6 +31,20 @@ typedef struct s_map_data
 	int		f_color;
 }	t_map_data;
 
+
+typedef struct s_cub
+{
+	int	px;
+	int	py;
+	int	mapX;
+	int	mapY;
+
+	mlx_t		*mlx_ptr;
+	mlx_image_t	*mlx_img;
+	t_map_data	*data;
+}	t_cub;
+
+
 // Parser
 int		parser(int argc, char **argv, t_map_data *data);
 int		parse_map_line(char *line, t_map_data *data);
@@ -38,5 +53,13 @@ int		parse_map_line(char *line, t_map_data *data);
 int		put_error(char *str, int i);
 void	free_array(char **array);
 void	free_map_data(t_map_data *data);
+
+//init
+void	drawPlayer(void *param);
+void	ft_hook(void* param);
+void	display(t_cub *game);
+void	init(t_cub *game);
+
+
 
 #endif
