@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 11:38:04 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/15 14:58:34 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/05/15 20:17:02 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,5 +113,5 @@ static int	check_character(t_map_data *data, int i, int j, int *player_count)
 static int	is_valid_map_char(char c)
 {
 	return (c == '0' || c == '1' || c == 'N' || c == 'S' || c == 'E' \
-	|| c == 'W' || c == '\0');
+	|| c == 'W' || c == ' ');
 }

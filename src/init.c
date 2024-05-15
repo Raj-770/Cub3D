@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 12:32:46 by fnikzad           #+#    #+#             */
-/*   Updated: 2024/05/15 19:02:51 by fnikzad          ###   ########.fr       */
+/*   Updated: 2024/05/15 20:08:07 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,11 @@ double FixAng(double ang) {
 void ft_hook(void *param)
 {
 	t_cub *game = param;
-	
+
 	if (mlx_is_key_down(game->mlx_ptr, MLX_KEY_ESCAPE))
 		mlx_close_window(game->mlx_ptr);
-	
+	game->player->pdx = cos(game->player->p_a);
+	game->player->pdy = sin(game->player->p_a);
 	if (mlx_is_key_down(game->mlx_ptr, MLX_KEY_A))
 	{
 		game->player->p_a -= 0.1;
