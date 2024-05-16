@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:26:50 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/16 18:07:11 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/05/16 18:58:32 by fnikzad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@
 # include <MLX42.h>
 # include <get_next_line.h>
 
-# define PI 3.1415926535
+#define	PI 3.1415926535
+#define P2	PI/2
+#define P3	3 * PI / 2
 # define WIDTH 1920
 # define HEIGHT 1080
 
@@ -35,6 +37,13 @@ typedef struct s_ray
 	float	ra;
 	float	xo;
 	float	yo;
+	float	dis_h;
+	float	dis_v;
+	float	vx;
+	float	vy;
+	float	hx;
+	float	hy;
+	
 }	t_ray;
 
 typedef struct s_player
