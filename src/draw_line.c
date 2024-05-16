@@ -6,11 +6,7 @@
 /*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 17:57:37 by rpambhar          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/05/16 18:38:50 by fnikzad          ###   ########.fr       */
-=======
-/*   Updated: 2024/05/16 18:37:32 by rpambhar         ###   ########.fr       */
->>>>>>> 68edfb3d1e5cbd095275b8fcf4a102fd235d271a
+/*   Updated: 2024/05/16 20:58:20 by fnikzad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +64,8 @@ void	mlx_draw_line(t_cub *game, int ray)
 	initialize_line(&line, game, ray);
 	while (line.x0 != line.x1 || line.y0 != line.y1)
 	{
-<<<<<<< HEAD
 		if (line.y0 >= 0 && line.x0 >= 0 && line.y0 < HEIGHT && line.x0 < WIDTH)
-=======
-		if (line.y0 >= 0 && line.x0 >= 0 && line.x0 < WIDTH && line.y0 < HEIGHT)
->>>>>>> 68edfb3d1e5cbd095275b8fcf4a102fd235d271a
+
 			mlx_put_pixel(game->mlx_img, line.x0, line.y0, line.color);
 		line.err2 = 2 * line.err;
 		if (line.err2 > -(line.dy))
