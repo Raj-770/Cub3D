@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 12:32:46 by fnikzad           #+#    #+#             */
-/*   Updated: 2024/05/15 20:08:07 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/05/16 15:13:38 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,14 @@ void	init_map_data(t_map_data *data)
 	data->c_color = 0;
 	data->f_color = 0;
 	data->map = NULL;
-	data->map_size = 0;
+	data->map_height = 0;
 	data->start_px = 0;
 	data->start_py = 0;
 	data->no_tex = NULL;
 	data->so_tex = NULL;
 	data->ea_tex = NULL;
 	data->we_tex = NULL;
+	data->map_width = 0;
 }
 
 void	initialize_parser(t_parser *parser)

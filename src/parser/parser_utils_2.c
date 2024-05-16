@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 11:38:04 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/16 15:02:36 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/05/16 15:13:38 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	add_line_to_map(char *line, t_map_data *data, t_parser *parser)
 	if (!data->map[parser->map_size])
 		return (0);
 	parser->map_size++;
-	data->map_size = parser->map_size;
+	data->map_height = parser->map_size;
 	return (1);
 }
 

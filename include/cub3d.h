@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:26:50 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/16 14:57:39 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/05/16 15:12:50 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ typedef struct s_map_data
 	int		f_color;
 	int		start_px;
 	int		start_py;
-	int		map_size;
+	int		map_height;
+	int		map_width;
 }	t_map_data;
 
 

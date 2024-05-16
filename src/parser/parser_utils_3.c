@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:00:55 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/16 15:03:12 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/05/16 15:13:38 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	check_map_rules(t_map_data *data)
 	i = 0;
 	player_count = 0;
 	trim_map(data);
-	while (i < data->map_size)
+	while (i < data->map_height)
 	{
 		j = 0;
 		while (data->map[i][j])
@@ -72,7 +72,7 @@ static void	trim_map(t_map_data *data)
 	int	i;
 
 	start = 0;
-	end = data->map_size - 1;
+	end = data->map_height - 1;
 	while (start <= end && data->map[start][0] == '\0')
 		start++;
 	while (end >= start && data->map[end][0] == '\0')
@@ -88,9 +88,9 @@ static void	trim_map(t_map_data *data)
 		}
 	}
 	i = new_length - 1;
-	while (++i < data->map_size)
+	while (++i < data->map_height)
 		data->map[i] = NULL;
-	data->map_size = new_length;
+	data->map_height = new_length;
 }
 
 static int	check_for_openings(t_map_data *data)
@@ -101,12 +101,12 @@ static int	check_for_openings(t_map_data *data)
 	i = -1;
 	if (!check_open_lines(data))
 		return (put_error("The map has openings", 0));
-	while (++i < data->map_size)
+	while (++i < data->map_height)
 	{
 		j = -1;
 		while (++j < ft_strlen(data->map[i]) - 1)
 			if (data->map[i][j] == '0')
-				if (i == 0 || i == data->map_size -1 \
+				if (i == 0 || i == data->map_height -1 \
 				|| data->map[i - 1][j] == ' ' || data->map[i - 1][j] == '\0' \
 				|| data->map[i][j - 1] == ' ' || data->map[i][j - 1] == '\0' \
 				|| data->map[i + 1][j] == ' ' || data->map[i + 1][j] == '\0' \
@@ -120,10 +120,14 @@ static int	check_open_lines(t_map_data *data)
 {
 	char	*trimed_line;
 	int		i;
+	int		len;
 
 	i = 0;
-	while (i < data->map_size)
+	while (i < data->map_height)
 	{
+		len = ft_strlen(data->map[i]);
+		if (data->map_width < len)
+			data->map_width = len;
 		trimed_line = ft_strtrim(data->map[i], " ");
 		if (!(trimed_line[0] = '1') || !(trimed_line[ft_strlen(trimed_line) - 1] == '1'))
 		{

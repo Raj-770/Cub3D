@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:18:46 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/15 14:27:11 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/05/16 15:13:38 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	free_map_data(t_map_data *data)
 	if (data->map)
 	{
 		i = 0;
-		while (i < data->map_size)
+		while (i < data->map_height)
 		{
 			free(data->map[i]);
 			i++;
