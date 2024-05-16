@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:18:00 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/15 15:00:28 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/05/16 14:58:03 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,7 @@ int	parse_map_file_line(char *line, t_map_data *data, t_parser *parser)
 		}
 		i++;
 	}
-	if (line[0] == '\0' && !parser->inside_map)
-		return (1);
-	else if (line[0] == '\0' && parser->inside_map)
-		return (put_error("Empty Line inside map", 0));
-	else
-		return (parse_map_line(line, data, parser));
+	return (add_line_to_map(line, data, parser));
 	return (1);
 }
 

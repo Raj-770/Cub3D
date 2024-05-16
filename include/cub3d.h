@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:26:50 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/15 19:09:32 by fnikzad          ###   ########.fr       */
+/*   Updated: 2024/05/16 14:57:39 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ typedef struct s_parser
 // Parser
 int		parser(int argc, char **argv, t_map_data *data);
 int		parse_map_file_line(char *line, t_map_data *data, t_parser *parser);
+int		add_line_to_map(char *line, t_map_data *data, t_parser *parser);
 int		parse_map_line(char *line, t_map_data *data, t_parser *parser);
 int		check_map_rules(t_map_data *data);
 
