@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 14:53:56 by fnikzad           #+#    #+#             */
-/*   Updated: 2024/05/16 15:40:42 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/05/16 17:25:51 by fnikzad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,13 @@ void	drawMap2D(void *param)
 		{
 			if (game->data->map[y][x] == '1')
 				color = ft_pixel(255, 255, 255, 255);
-			else
+			else if (game->data->map[y][x] == '0')
 				color = ft_pixel(0, 0, 0, 255);
+			else
+			{
+				x++;
+				continue ;
+			}
 			draw_square(game->mlx_img, x * block_size, y * block_size, block_size - 1, color);
 			x++;
 		}

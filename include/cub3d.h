@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:26:50 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/16 15:37:16 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/05/16 17:29:47 by fnikzad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct s_cub
 	t_ray		ray;
 	mlx_image_t	*mlx_img;
 	t_map_data	*data;
+	double		block_size;
 }	t_cub;
 
 typedef struct s_parser
@@ -109,6 +110,7 @@ void	draw_square(void *mlx_img, int start_x, int start_y, int size, int color);
 int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 
 void	draw_rays(t_cub *game);
+void mlx_draw_line(void *mlx_img, int x0, int y0, int x1, int y1, int color);
 
 
 #endif

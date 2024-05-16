@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 12:32:46 by fnikzad           #+#    #+#             */
-/*   Updated: 2024/05/16 15:13:38 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/05/16 17:28:02 by fnikzad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	init(t_cub *game)
 	game->player->pdx = cos(game->player->p_a) * 5;
 	game->player->pdy = sin (game->player->p_a) * 5;
 	game->mlx_ptr = mlx_init(WIDTH, HEIGHT, "cub3d", true);
+	game->block_size = calculate_block_size(WIDTH, HEIGHT, game->data->map_width, game->data->map_height);
 }
 
 double FixAng(double ang) {
@@ -66,6 +67,7 @@ void ft_hook(void *param)
 {
 	t_cub *game = param;
 
+	draw_rays(game);
 	if (mlx_is_key_down(game->mlx_ptr, MLX_KEY_ESCAPE))
 		mlx_close_window(game->mlx_ptr);
 	game->player->pdx = cos(game->player->p_a);
