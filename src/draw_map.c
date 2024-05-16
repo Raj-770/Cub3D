@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 14:53:56 by fnikzad           #+#    #+#             */
-/*   Updated: 2024/05/16 15:13:38 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/05/16 15:40:42 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,12 @@ void	drawMap2D(void *param)
 	int	player_color;
 	int	x = 0;
 	int y = 0;
+	double	block_size;
 
 	mlx_delete_image(game->mlx_ptr, game->mlx_img);
 	game->mlx_img = mlx_new_image(game->mlx_ptr, WIDTH, HEIGHT);
 	mlx_image_to_window(game->mlx_ptr, game->mlx_img, 0, 0);
+	block_size = calculate_block_size(WIDTH, HEIGHT, game->data->map_width, game->data->map_height);
 	while (y < game->data->map_height)
 	{
 		x = 0;
@@ -82,7 +84,7 @@ void	drawMap2D(void *param)
 				color = ft_pixel(255, 255, 255, 255);
 			else
 				color = ft_pixel(0, 0, 0, 255);
-			draw_square(game->mlx_img, x * (HEIGHT / game->data->map_height), y * (HEIGHT / game->data->map_height), (HEIGHT / game->data->map_height) - 1, color);
+			draw_square(game->mlx_img, x * block_size, y * block_size, block_size - 1, color);
 			x++;
 		}
 		y++;

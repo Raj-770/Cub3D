@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:26:50 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/16 15:12:50 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/05/16 15:37:16 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ int		check_map_rules(t_map_data *data);
 int		put_error(char *str, int i);
 void	free_array(char **array);
 void	free_map_data(t_map_data *data);
+double	calculate_block_size(int sw, int sh, int mw, int mh);
 
 // Init
 void	init_map_data(t_map_data *data);
