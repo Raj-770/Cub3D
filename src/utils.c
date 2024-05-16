@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:18:46 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/16 15:39:38 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/05/16 17:38:05 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,11 @@ void	free_map_data(t_map_data *data)
 	}
 }
 
-
 double	calculate_block_size(int sw, int sh, int mw, int mh)
 {
 	double	block_size_width;
 	double	block_size_height;
-	double block_size;
+	double	block_size;
 
 	block_size_width = (double)sw / mw;
 	block_size_height = (double)sh / mh;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:28:03 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/16 17:27:10 by fnikzad          ###   ########.fr       */
+/*   Updated: 2024/05/16 18:08:07 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int argc, char **argv)
 	game.data = &map_data;
 	init(&game);
 	display(&game);
-	mlx_loop_hook(game.mlx_ptr, drawMap2D, &game);
+	mlx_loop_hook(game.mlx_ptr, draw_map_2d, &game);
 	mlx_loop_hook(game.mlx_ptr, ft_hook, &game);
 	mlx_loop(game.mlx_ptr);
 	free_map_data(&map_data);

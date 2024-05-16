@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 14:22:08 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/15 15:06:25 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/05/16 16:45:01 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,3 @@ static int	parse_map_file(char *path, t_map_data *data)
 	close(parser.fd);
 	return (1);
 }
-

@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:00:55 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/16 15:13:38 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/05/16 16:50:30 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	check_map_rules(t_map_data *data)
 
 static int	check_character(t_map_data *data, int i, int j, int *player_count)
 {
-	char c;
+	char	c;
 
 	c = data->map[i][j];
 	if (!(c == '0' || c == '1' || c == 'N' || c == 'S' || c == 'E' \
@@ -95,7 +95,7 @@ static void	trim_map(t_map_data *data)
 
 static int	check_for_openings(t_map_data *data)
 {
-	int i;
+	int	i;
 	int	j;
 
 	i = -1;
@@ -129,7 +129,8 @@ static int	check_open_lines(t_map_data *data)
 		if (data->map_width < len)
 			data->map_width = len;
 		trimed_line = ft_strtrim(data->map[i], " ");
-		if (!(trimed_line[0] = '1') || !(trimed_line[ft_strlen(trimed_line) - 1] == '1'))
+		if (!(trimed_line[0] == '1') || \
+		!(trimed_line[ft_strlen(trimed_line) - 1] == '1'))
 		{
 			free(trimed_line);
 			return (0);

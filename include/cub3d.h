@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:26:50 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/16 17:29:47 by fnikzad          ###   ########.fr       */
+/*   Updated: 2024/05/16 18:07:11 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 # include <MLX42.h>
 # include <get_next_line.h>
 
-#define PI 3.1415926535
-#define WIDTH 1920
-#define HEIGHT 1080
+# define PI 3.1415926535
+# define WIDTH 1920
+# define HEIGHT 1080
 
 typedef struct s_ray
 {
@@ -46,7 +46,6 @@ typedef struct s_player
 	float	p_a;
 }	t_player;
 
-
 typedef struct s_map_data
 {
 	char	**map;
@@ -61,7 +60,6 @@ typedef struct s_map_data
 	int		map_height;
 	int		map_width;
 }	t_map_data;
-
 
 typedef struct s_cub
 {
@@ -89,6 +87,7 @@ int		parse_map_file_line(char *line, t_map_data *data, t_parser *parser);
 int		add_line_to_map(char *line, t_map_data *data, t_parser *parser);
 int		parse_map_line(char *line, t_map_data *data, t_parser *parser);
 int		check_map_rules(t_map_data *data);
+void	mlx_draw_line(t_cub *game, int line_length);
 
 // Utils
 int		put_error(char *str, int i);
@@ -101,16 +100,19 @@ void	init_map_data(t_map_data *data);
 void	initialize_parser(t_parser *parser);
 
 //init
-void	ft_hook(void* param);
+void	ft_hook(void *param);
 void	display(t_cub *game);
 void	init(t_cub *game);
 
-void	drawMap2D(void *param);
-void	draw_square(void *mlx_img, int start_x, int start_y, int size, int color);
-int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
-
 void	draw_rays(t_cub *game);
-void mlx_draw_line(void *mlx_img, int x0, int y0, int x1, int y1, int color);
+// Hooks
+void	ft_hook(void *param);
 
+
+void	draw_map_2d(void *param);
+// void	draw_square(t_cub *game, int start_x, int start_y, int color);
+void	draw_square_2(t_cub *game, int start_x, int start_y, int color);
+void	draw_player(t_cub *game);
+int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 
 #endif

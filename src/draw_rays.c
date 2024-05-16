@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_rays.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:05:52 by fnikzad           #+#    #+#             */
-/*   Updated: 2024/05/16 17:59:07 by fnikzad          ###   ########.fr       */
+/*   Updated: 2024/05/16 18:18:29 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,6 @@ void	draw_rays(t_cub *game)
 		}
 		r++;
 	}
-	int ray_color = ft_pixel(0, 255, 255, 255);
-	mlx_draw_line(game->mlx_img, game->player->px, game->player->py, game->ray.rx, game->ray.ry, ray_color);
+	// int ray_color = ft_pixel(0, 255, 255, 255);
+	mlx_draw_line(game, 1);
 }
