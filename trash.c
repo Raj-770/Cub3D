@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   draw_rays.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/15 19:05:52 by fnikzad           #+#    #+#             */
-/*   Updated: 2024/05/17 14:04:32 by fnikzad          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "cub3d.h"
 #include "math.h"
@@ -21,26 +10,6 @@ float degToRad(int a)
 float distance(ax,ay,bx,by,ang)
 { 
 	return cos(degToRad(ang))*(bx-ax)-sin(degToRad(ang))*(by-ay);
-}
-
-void	init_rays(t_ray *ray)
-{
-	ray->r = 0;
-	ray->mx = 0;
-	ray->my = 0;
-	ray->mp = 0;
-	ray->dof = 0;
-	ray->rx = 0;
-	ray->ry = 0;
-	ray->ra = 0;
-	ray->xo = 0;
-	ray->yo = 0;
-	ray->dis_h = 0;
-	ray->dis_v = 0;
-	ray->vx = 0;
-	ray->vy = 0;
-	ray->hx = 0;
-	ray->hy = 0;
 }
 
 void	vertical_rays(t_cub *game) 
@@ -74,7 +43,6 @@ void	vertical_rays(t_cub *game)
 	{
 		game->ray.mx = (int)(game->ray.rx) >> 6;
 		game->ray.my = (int)(game->ray.ry) >> 6;
-		game->ray.mp = game->ray.my * game->data->map_width + game->ray.mx;
 
 		if (game->ray.mx >= 0 && game->ray.mx < game->data->map_width &&
 			game->ray.my >= 0 && game->ray.my < game->data->map_height)
@@ -85,7 +53,7 @@ void	vertical_rays(t_cub *game)
 				game->ray.vy = game->ray.ry;
 				game->ray.dis_v = distance(game->player->px, game->player->py, game->ray.vx, game->ray.vy, game->ray.ra);
 				game->ray.dof = 8;
-				break;
+				// break;
 			}
 			else
 			{
@@ -102,21 +70,13 @@ void	vertical_rays(t_cub *game)
 void	draw_rays(t_cub *game)
 {
 	int	r;
-	game->ray.ra = game->player->p_a - DR * 30;
-	if (game->ray.ra < 0)
-	{
-		game->ray.ra += 2 * PI;
-	}
-	if (game->ray.ra > 2 * PI)
-	{
-		game->ray.ra -= 2 * PI;
-	}
+	game->ray.ra = game->player->p_a;
 	float	aTan = -1 / tan(game->ray.ra);
 	r = 0;
 	game->ray.dis_h = 1000000;
 	game->ray.hx = game->player->px;
 	game->ray.hy = game->player->py;
-	while (r < 60)
+	while (r < 1)
 	{
 		game->ray.dof = 0;
 		if (game->ray.ra > PI)
@@ -153,7 +113,7 @@ void	draw_rays(t_cub *game)
 					game->ray.hy = game->ray.ry;
 					game->ray.dis_h = distance(game->player->px, game->player->py, game->ray.hx, game->ray.hy, game->ray.ra);
 					game->ray.dof = 8;
-					break;
+					// break;
 				}
 				else
 				{
@@ -177,15 +137,6 @@ void	draw_rays(t_cub *game)
 			game->ray.ry = game->ray.hy;
 		}
 		mlx_draw_line(game, 1);
-		game->ray.ra += DR;
-		if (game->ray.ra < 0)
-		{
-			game->ray.ra += 2 * PI;
-		}
-		if (game->ray.ra > 2 * PI)
-		{
-			game->ray.ra -= 2 * PI;
-		}
 		r++;
 	}
 	// int ray_color = ft_pixel(0, 255, 255, 255);

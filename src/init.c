@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 12:32:46 by fnikzad           #+#    #+#             */
-/*   Updated: 2024/05/16 18:22:05 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/05/17 17:02:38 by fnikzad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,12 @@ void	display(t_cub *game)
 void	init(t_cub *game)
 {
 	game->player = malloc(sizeof(t_player));
-	game->player->px = (game->data->start_px * 64) - 32;
-	game->player->py = (game->data->start_py * 64) - 32;
+	
+	game->block_size = calculate_block_size(WIDTH, HEIGHT, \
+	game->data->map_width, game->data->map_height);
+	game->player->px = (game->data->start_px * game->block_size) + (game->block_size) / 2;
+	game->player->py = (game->data->start_py * game->block_size) + (game->block_size) / 2;
 	game->player->pdx = cos(game->player->p_a) * 5;
 	game->player->pdy = sin (game->player->p_a) * 5;
 	game->mlx_ptr = mlx_init(WIDTH, HEIGHT, "cub3d", true);
-	game->block_size = calculate_block_size(WIDTH, HEIGHT, \
-	game->data->map_width, game->data->map_height);
 }

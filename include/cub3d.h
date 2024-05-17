@@ -6,7 +6,7 @@
 /*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:26:50 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/16 18:58:32 by fnikzad          ###   ########.fr       */
+/*   Updated: 2024/05/17 13:56:40 by fnikzad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@
 #define	PI 3.1415926535
 #define P2	PI/2
 #define P3	3 * PI / 2
-# define WIDTH 1920
-# define HEIGHT 1080
+#define WIDTH 1920
+#define HEIGHT 1080
+#define DR 0.0174533
 
 typedef struct s_ray
 {
