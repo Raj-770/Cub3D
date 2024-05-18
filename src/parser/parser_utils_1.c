@@ -6,34 +6,30 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:18:00 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/16 14:58:03 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/05/18 13:10:30 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-typedef struct s_id
-{
-	const char	*prefix;
-	size_t		length;
-}	t_id;
-
 static int	parse_textures_and_colors(char *line, t_id *id, t_map_data *data);
 static int	parse_color(char *line, t_id *id, t_map_data *data);
-static void	initialize_identifiers(t_id *identifiers);
 
 int	parse_map_file_line(char *line, t_map_data *data, t_parser *parser)
 {
-	t_id	identifiers[6];
 	int		i;
+	t_id	*identifier;
 
-	initialize_identifiers(identifiers);
+	identifier = parser->identifiers;
 	i = 0;
 	while (i < 6)
 	{
-		if (ft_strncmp(line, identifiers[i].prefix, identifiers[i].length) == 0)
+		if (ft_strncmp(line, identifier[i].prefix, identifier[i].length) == 0)
 		{
-			if (!parse_textures_and_colors(line, &identifiers[i], data))
+			identifier[i].count++;
+			if (identifier[i].count > 1)
+				return (put_error("More than expected identifiers Found", 0));
+			if (!parse_textures_and_colors(line, &identifier[i], data))
 				return (0);
 			return (1);
 		}
@@ -93,14 +89,4 @@ static int	parse_color(char *line, t_id *id, t_map_data *data)
 	else if (ft_strcmp(id->prefix, "F ") == 0)
 		data->f_color = color;
 	return (1);
-}
-
-static void	initialize_identifiers(t_id *identifiers)
-{
-	identifiers[0] = (t_id){"NO ", 3};
-	identifiers[1] = (t_id){"SO ", 3};
-	identifiers[2] = (t_id){"EA ", 3};
-	identifiers[3] = (t_id){"WE ", 3};
-	identifiers[4] = (t_id){"C ", 2};
-	identifiers[5] = (t_id){"F ", 2};
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:26:50 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/17 13:56:40 by fnikzad          ###   ########.fr       */
+/*   Updated: 2024/05/18 13:02:42 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_ray
 	float	vy;
 	float	hx;
 	float	hy;
-	
+
 }	t_ray;
 
 typedef struct s_player
@@ -81,6 +81,13 @@ typedef struct s_cub
 	double		block_size;
 }	t_cub;
 
+typedef struct s_id
+{
+	const char	*prefix;
+	size_t		length;
+	int			count;
+}	t_id;
+
 typedef struct s_parser
 {
 	char	*line;
@@ -89,6 +96,7 @@ typedef struct s_parser
 	int		inside_map;
 	int		map_size;
 	int		map_capacity;
+	t_id	identifiers[6];
 }	t_parser;
 
 // Parser

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 14:53:56 by fnikzad           #+#    #+#             */
-/*   Updated: 2024/05/17 16:38:13 by fnikzad          ###   ########.fr       */
+/*   Updated: 2024/05/18 11:03:29 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,6 @@ int	control_player(t_cub *game)
 			{
 				if (game->player->px + 8 > (x) * game->block_size)
 				{
-					printf("x: %d\n", x);
-				printf("px: %d, wx: %f, wxa: %f\n", game->player->px + 8, (x) * game->block_size, (x) * game->block_size);
 					return (0);
 				}
 			}

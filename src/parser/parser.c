@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 14:22:08 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/16 16:45:01 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/05/18 13:09:15 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static int	check_for_file_extension(char *str);
 static int	parse_map_file(char *path, t_map_data *data);
+static int	check_identifiers(t_map_data *data);
 
 int	parser(int argc, char **argv, t_map_data *data)
 {
@@ -60,8 +61,16 @@ static int	parse_map_file(char *path, t_map_data *data)
 		free(parser.line);
 		free(parser.trimed_line);
 	}
-	if (!check_map_rules(data))
+	if (!check_map_rules(data) || !check_identifiers(data))
 		return (0);
 	close(parser.fd);
+	return (1);
+}
+
+static int	check_identifiers(t_map_data *data)
+{
+	if (!data->c_color || !data->f_color || !data->no_tex || !data->so_tex \
+	|| !data->ea_tex || !data->we_tex || !data->map)
+		return (put_error("Missing Identifier", 0));
 	return (1);
 }

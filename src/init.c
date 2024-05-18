@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 12:32:46 by fnikzad           #+#    #+#             */
-/*   Updated: 2024/05/17 17:02:38 by fnikzad          ###   ########.fr       */
+/*   Updated: 2024/05/18 13:04:08 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,16 @@ void	init_map_data(t_map_data *data)
 	data->map_width = 0;
 }
 
+static void	initialize_identifiers(t_id *identifiers)
+{
+	identifiers[0] = (t_id){"NO ", 3, 0};
+	identifiers[1] = (t_id){"SO ", 3, 0};
+	identifiers[2] = (t_id){"EA ", 3, 0};
+	identifiers[3] = (t_id){"WE ", 3, 0};
+	identifiers[4] = (t_id){"C ", 2, 0};
+	identifiers[5] = (t_id){"F ", 2, 0};
+}
+
 void	initialize_parser(t_parser *parser)
 {
 	parser->line = NULL;
@@ -34,6 +44,7 @@ void	initialize_parser(t_parser *parser)
 	parser->inside_map = 0;
 	parser->map_capacity = 10;
 	parser->map_size = 0;
+	initialize_identifiers(parser->identifiers);
 }
 
 void	display(t_cub *game)
@@ -45,7 +56,7 @@ void	display(t_cub *game)
 void	init(t_cub *game)
 {
 	game->player = malloc(sizeof(t_player));
-	
+
 	game->block_size = calculate_block_size(WIDTH, HEIGHT, \
 	game->data->map_width, game->data->map_height);
 	game->player->px = (game->data->start_px * game->block_size) + (game->block_size) / 2;
