@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 11:38:04 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/16 15:13:38 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/05/18 13:26:40 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,33 @@ static char	**ft_realloc_map(char **map, t_parser *parser)
 	parser->map_capacity += 10;
 	free(map);
 	return (new_map);
+}
+
+void	trim_map(t_map_data *data)
+{
+	int	start;
+	int	end;
+	int	new_length;
+	int	i;
+
+	start = 0;
+	end = data->map_height - 1;
+	while (start <= end && data->map[start][0] == '\0')
+		start++;
+	while (end >= start && data->map[end][0] == '\0')
+		end--;
+	new_length = end - start + 1;
+	if (start > 0 && new_length)
+	{
+		i = 0;
+		while (i < new_length)
+		{
+			data->map[i] = data->map[start + i];
+			i++;
+		}
+	}
+	i = new_length - 1;
+	while (++i < data->map_height)
+		data->map[i] = NULL;
+	data->map_height = new_length;
 }

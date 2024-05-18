@@ -6,14 +6,13 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:00:55 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/18 13:22:21 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/05/18 13:27:08 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 static int	check_character(t_map_data *data, int i, int j, int *player_count);
-static void	trim_map(t_map_data *data);
 static int	check_for_openings(t_map_data *data);
 static int	check_open_lines(t_map_data *data);
 static int	check_for_opeings_helper(int i, int j, int len, t_map_data *data);
@@ -65,35 +64,6 @@ static int	check_character(t_map_data *data, int i, int j, int *player_count)
 	return (1);
 }
 
-static void	trim_map(t_map_data *data)
-{
-	int	start;
-	int	end;
-	int	new_length;
-	int	i;
-
-	start = 0;
-	end = data->map_height - 1;
-	while (start <= end && data->map[start][0] == '\0')
-		start++;
-	while (end >= start && data->map[end][0] == '\0')
-		end--;
-	new_length = end - start + 1;
-	if (start > 0 && new_length)
-	{
-		i = 0;
-		while (i < new_length)
-		{
-			data->map[i] = data->map[start + i];
-			i++;
-		}
-	}
-	i = new_length - 1;
-	while (++i < data->map_height)
-		data->map[i] = NULL;
-	data->map_height = new_length;
-}
-
 static int	check_for_openings(t_map_data *data)
 {
 	int	i;
@@ -120,13 +90,17 @@ static int	check_for_opeings_helper(int i, int j, int len, t_map_data *data)
 {
 	if (data->map[i][j] == '0')
 	{
-		if (i == 0 || j >= ft_strlen(data->map[i - 1]) || data->map[i - 1][j] == ' ' || data->map[i - 1][j] == '\0')
+		if (i == 0 || j >= ft_strlen(data->map[i - 1]) || \
+		data->map[i - 1][j] == ' ' || data->map[i - 1][j] == '\0')
 			return (0);
-		if (i == data->map_height - 1 || j >= ft_strlen(data->map[i + 1]) || data->map[i + 1][j] == ' ' || data->map[i + 1][j] == '\0')
+		if (i == data->map_height - 1 || j >= ft_strlen(data->map[i + 1]) \
+		|| data->map[i + 1][j] == ' ' || data->map[i + 1][j] == '\0')
 			return (0);
-		if (j == 0 || data->map[i][j - 1] == ' ' || data->map[i][j - 1] == '\0')
+		if (j == 0 || data->map[i][j - 1] == ' ' \
+		|| data->map[i][j - 1] == '\0')
 			return (0);
-		if (j == len - 1 || data->map[i][j + 1] == ' ' || data->map[i][j + 1] == '\0')
+		if (j == len - 1 || data->map[i][j + 1] == ' ' \
+		|| data->map[i][j + 1] == '\0')
 			return (0);
 	}
 	return (1);

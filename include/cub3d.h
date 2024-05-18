@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:26:50 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/18 13:02:42 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/05/18 13:27:28 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,9 +103,9 @@ typedef struct s_parser
 int		parser(int argc, char **argv, t_map_data *data);
 int		parse_map_file_line(char *line, t_map_data *data, t_parser *parser);
 int		add_line_to_map(char *line, t_map_data *data, t_parser *parser);
-int		parse_map_line(char *line, t_map_data *data, t_parser *parser);
 int		check_map_rules(t_map_data *data);
 void	mlx_draw_line(t_cub *game, int line_length);
+void	trim_map(t_map_data *data);
 
 // Utils
 int		put_error(char *str, int i);
