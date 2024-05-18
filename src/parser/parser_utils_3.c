@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:00:55 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/16 16:50:30 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/05/18 13:22:21 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static int	check_character(t_map_data *data, int i, int j, int *player_count);
 static void	trim_map(t_map_data *data);
 static int	check_for_openings(t_map_data *data);
 static int	check_open_lines(t_map_data *data);
+static int	check_for_opeings_helper(int i, int j, int len, t_map_data *data);
 
 int	check_map_rules(t_map_data *data)
 {
@@ -97,6 +98,7 @@ static int	check_for_openings(t_map_data *data)
 {
 	int	i;
 	int	j;
+	int	len;
 
 	i = -1;
 	if (!check_open_lines(data))
@@ -104,14 +106,28 @@ static int	check_for_openings(t_map_data *data)
 	while (++i < data->map_height)
 	{
 		j = -1;
-		while (++j < ft_strlen(data->map[i]) - 1)
-			if (data->map[i][j] == '0')
-				if (i == 0 || i == data->map_height -1 \
-				|| data->map[i - 1][j] == ' ' || data->map[i - 1][j] == '\0' \
-				|| data->map[i][j - 1] == ' ' || data->map[i][j - 1] == '\0' \
-				|| data->map[i + 1][j] == ' ' || data->map[i + 1][j] == '\0' \
-				|| data->map[i][j + 1] == ' ' || data->map[i][j + 1] == '\0')
-					return (put_error("The map has openings", 0));
+		len = ft_strlen(data->map[i]);
+		while (++j < len)
+		{
+			if (!check_for_opeings_helper(i, j, len, data))
+				return (put_error("The map has an opening", 0));
+		}
+	}
+	return (1);
+}
+
+static int	check_for_opeings_helper(int i, int j, int len, t_map_data *data)
+{
+	if (data->map[i][j] == '0')
+	{
+		if (i == 0 || j >= ft_strlen(data->map[i - 1]) || data->map[i - 1][j] == ' ' || data->map[i - 1][j] == '\0')
+			return (0);
+		if (i == data->map_height - 1 || j >= ft_strlen(data->map[i + 1]) || data->map[i + 1][j] == ' ' || data->map[i + 1][j] == '\0')
+			return (0);
+		if (j == 0 || data->map[i][j - 1] == ' ' || data->map[i][j - 1] == '\0')
+			return (0);
+		if (j == len - 1 || data->map[i][j + 1] == ' ' || data->map[i][j + 1] == '\0')
+			return (0);
 	}
 	return (1);
 }
