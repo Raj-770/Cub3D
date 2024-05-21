@@ -6,187 +6,138 @@
 /*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:05:52 by fnikzad           #+#    #+#             */
-/*   Updated: 2024/05/17 14:04:32 by fnikzad          ###   ########.fr       */
+/*   Updated: 2024/05/21 13:44:06 by fnikzad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "math.h"
 
-float degToRad(int a)
+
+void find_horizontal(t_cub *game, float ray_angle)
 {
-	return (a*( PI/180.0));
+    float xn, yn;
+    float xs, ys;
+
+    if (ray_angle == 0 || ray_angle == M_PI) {
+        // Special case: ray is perfectly horizontal
+        game->ray.hx = game->player->px;
+        game->ray.hy = game->player->py;
+        game->ray.dis_h = INFINITY;  // No valid horizontal intersection
+        return;
+    }
+
+    if (ray_angle < M_PI) {  // Ray is facing down
+        yn = game->player->py + (game->block_size - fmod(game->player->py, game->block_size));
+        ys = game->block_size - 1;
+    } else {  // Ray is facing up
+        yn = game->player->py - fmod(game->player->py, game->block_size);
+        ys = -game->block_size - 1;
+    }
+    xs = ys / tan(ray_angle);
+    xn = game->player->px + (yn - game->player->py) / tan(ray_angle);
+
+    while (xn >= 0 && xn < game->data->map_width * game->block_size &&
+           yn >= 0 && yn < game->data->map_height * game->block_size) {
+        int mapX = (int)(xn / game->block_size);
+        int mapY = (int)(yn / game->block_size);
+
+        if (mapX >= 0 && mapX < game->data->map_width && mapY >= 0 && mapY < game->data->map_height) {
+            if (game->data->map[mapY][mapX] == '1') {  // Assuming '1' represents a wall
+                game->ray.hx = xn;
+                game->ray.hy = yn;
+                game->ray.dis_h = hypot(game->player->px - xn, game->player->py - yn);
+                return;
+            } else {
+                xn += xs;
+                yn += ys;
+            }
+        } else {
+            break;  // Break if the ray is out of bounds
+        }
+    }
+    game->ray.dis_h = INFINITY;  // No valid horizontal intersection found
 }
 
-float distance(ax,ay,bx,by,ang)
-{ 
-	return cos(degToRad(ang))*(bx-ax)-sin(degToRad(ang))*(by-ay);
+void find_vertical(t_cub *game, float ray_angle)
+{
+    float xn, yn;
+    float xs, ys;
+
+    if (ray_angle == M_PI_2 || ray_angle == 3 * M_PI_2) {
+        // Special case: ray is perfectly vertical
+        game->ray.vx = game->player->px;
+        game->ray.vy = game->player->py;
+        game->ray.dis_v = INFINITY;  // No valid vertical intersection
+        return;
+    }
+
+    if (ray_angle < M_PI_2 || ray_angle > 3 * M_PI_2) {  // Ray is facing right
+        xn = game->player->px + (game->block_size - fmod(game->player->px, game->block_size));
+        xs = game->block_size;
+    } else {  // Ray is facing left
+        xn = game->player->px - fmod(game->player->px, game->block_size);
+        xs = -game->block_size;
+    }
+    ys = xs * tan(ray_angle);
+    yn = game->player->py + (xn - game->player->px) * tan(ray_angle);
+
+    while (xn >= 0 && xn < game->data->map_width * game->block_size &&
+           yn >= 0 && yn < game->data->map_height * game->block_size) {
+        int mapX = (int)(xn / game->block_size);
+        int mapY = (int)(yn / game->block_size);
+
+        if (mapX >= 0 && mapX < game->data->map_width && mapY >= 0 && mapY < game->data->map_height) {
+            if (game->data->map[mapY][mapX] == '1') {  // Assuming '1' represents a wall
+                game->ray.vx = xn;
+                game->ray.vy = yn;
+                game->ray.dis_v = hypot(game->player->px - xn, game->player->py - yn);
+                return;
+            } else {
+                xn += xs;
+                yn += ys;
+            }
+        } else {
+            break;  // Break if the ray is out of bounds
+        }
+    }
+    game->ray.dis_v = INFINITY;  // No valid vertical intersection found
 }
 
-void	init_rays(t_ray *ray)
+void cast_rays(t_cub *game)
 {
-	ray->r = 0;
-	ray->mx = 0;
-	ray->my = 0;
-	ray->mp = 0;
-	ray->dof = 0;
-	ray->rx = 0;
-	ray->ry = 0;
-	ray->ra = 0;
-	ray->xo = 0;
-	ray->yo = 0;
-	ray->dis_h = 0;
-	ray->dis_v = 0;
-	ray->vx = 0;
-	ray->vy = 0;
-	ray->hx = 0;
-	ray->hy = 0;
-}
+    int num_rays = 60;
+    float angle_step = (M_PI / 3) / num_rays;
+    
+    game->ray.ra = game->player->p_a - (M_PI / 6);
+    
+    for (int i = 0; i < num_rays; i++)
+    {
+        // Normalize the ray angle
+        if (game->ray.ra < 0)
+            game->ray.ra += 2 * M_PI;
+        if (game->ray.ra > 2 * M_PI)
+            game->ray.ra -= 2 * M_PI;
 
-void	vertical_rays(t_cub *game) 
-{
-	float	nTan = -tan(game->ray.ra);
-	game->ray.dof = 0;
-	game->ray.dis_v = 1000000;
-	game->ray.vx = game->player->px;
-	game->ray.vy = game->player->py;
-	if (game->ray.ra > P2 && game->ray.ra < P3)
-	{
-		game->ray.rx = (((int)game->player->px >> 6)<< 6) - 0.0001;
-		game->ray.ry = (game->player->px - game->ray.rx) * nTan + game->player->py;
-		game->ray.xo = -game->block_size;
-		game->ray.yo = - game->ray.xo * nTan;
-	}
-	if (game->ray.ra < P2 || game->ray.ra > P3)
-	{
-		game->ray.rx = (((int)game->player->px >> 6)<< 6) + game->block_size;
-		game->ray.ry = (game->player->px - game->ray.rx) * nTan + game->player->py;
-		game->ray.xo = game->block_size;
-		game->ray.yo = - game->ray.xo * nTan;
-	}
-	if (game->ray.ra == 0 || game->ray.ra == PI)
-	{
-		game->ray.rx = game->player->px;
-		game->ray.ry = game->player->py;
-		game->ray.dof = 8;
-	}
-	while (game->ray.dof < 8)
-	{
-		game->ray.mx = (int)(game->ray.rx) >> 6;
-		game->ray.my = (int)(game->ray.ry) >> 6;
-		game->ray.mp = game->ray.my * game->data->map_width + game->ray.mx;
+        // Find intersections
+        find_horizontal(game, game->ray.ra);
+        find_vertical(game, game->ray.ra);
 
-		if (game->ray.mx >= 0 && game->ray.mx < game->data->map_width &&
-			game->ray.my >= 0 && game->ray.my < game->data->map_height)
-		{
-			if (game->ray.mp > 0 && game->data->map[game->ray.my][game->ray.mx] == '1')
-			{
-				game->ray.vx = game->ray.rx;
-				game->ray.vy = game->ray.ry;
-				game->ray.dis_v = distance(game->player->px, game->player->py, game->ray.vx, game->ray.vy, game->ray.ra);
-				game->ray.dof = 8;
-				break;
-			}
-			else
-			{
-				game->ray.rx += game->ray.xo;
-				game->ray.ry += game->ray.yo;
-				game->ray.dof += 1;
-			}
-		}
-		else
-			break;
-	}
-}
+        // Compare distances and choose the closer intersection
+        if (game->ray.dis_h < game->ray.dis_v)
+        {
+            game->ray.rx = game->ray.hx;
+            game->ray.ry = game->ray.hy;
+        }
+        else
+        {
+            game->ray.rx = game->ray.vx;
+            game->ray.ry = game->ray.vy;
+        }
 
-void	draw_rays(t_cub *game)
-{
-	int	r;
-	game->ray.ra = game->player->p_a - DR * 30;
-	if (game->ray.ra < 0)
-	{
-		game->ray.ra += 2 * PI;
-	}
-	if (game->ray.ra > 2 * PI)
-	{
-		game->ray.ra -= 2 * PI;
-	}
-	float	aTan = -1 / tan(game->ray.ra);
-	r = 0;
-	game->ray.dis_h = 1000000;
-	game->ray.hx = game->player->px;
-	game->ray.hy = game->player->py;
-	while (r < 60)
-	{
-		game->ray.dof = 0;
-		if (game->ray.ra > PI)
-		{
-			game->ray.ry = (((int)game->player->py >> 6)<< 6) - 0.0001;
-			game->ray.rx = (game->player->py - game->ray.ry) * aTan + game->player->px;
-			game->ray.yo = -game->block_size;
-			game->ray.xo = - game->ray.yo * aTan;
-		}
-		if (game->ray.ra < PI)
-		{
-			game->ray.ry = (((int)game->player->py >> 6)<< 6) + game->block_size;
-			game->ray.rx = (game->player->py - game->ray.ry) * aTan + game->player->px;
-			game->ray.yo = game->block_size;
-			game->ray.xo = - game->ray.yo * aTan;
-		}
-		if (game->ray.ra == 0 || game->ray.ra == PI)
-		{
-			game->ray.rx = game->player->px;
-			game->ray.ry = game->player->py;
-			game->ray.dof = 8;
-		}
-		while (game->ray.dof < 8)
-		{
-			game->ray.mx = (int)(game->ray.rx) >> 6;
-			game->ray.my = (int)(game->ray.ry) >> 6;
-			game->ray.mp = game->ray.my * game->data->map_width + game->ray.mx;
-			if (game->ray.mx >= 0 && game->ray.mx < game->data->map_width &&
-				game->ray.my >= 0 && game->ray.my < game->data->map_height)
-			{
-				if (game->ray.mp > 0 && game->data->map[game->ray.my][game->ray.mx] == '1')
-				{
-					game->ray.hx = game->ray.rx;
-					game->ray.hy = game->ray.ry;
-					game->ray.dis_h = distance(game->player->px, game->player->py, game->ray.hx, game->ray.hy, game->ray.ra);
-					game->ray.dof = 8;
-					break;
-				}
-				else
-				{
-					game->ray.rx += game->ray.xo;
-					game->ray.ry += game->ray.yo;
-					game->ray.dof += 1;
-				}
-			}
-			else
-				break;
-		}
-		vertical_rays(game);
-		if (game->ray.dis_v < game->ray.dis_h)
-		{
-			game->ray.rx = game->ray.vx;
-			game->ray.ry = game->ray.vy;
-		}
-		if (game->ray.dis_v > game->ray.dis_h)
-		{
-			game->ray.rx = game->ray.hx;
-			game->ray.ry = game->ray.hy;
-		}
-		mlx_draw_line(game, 1);
-		game->ray.ra += DR;
-		if (game->ray.ra < 0)
-		{
-			game->ray.ra += 2 * PI;
-		}
-		if (game->ray.ra > 2 * PI)
-		{
-			game->ray.ra -= 2 * PI;
-		}
-		r++;
-	}
-	// int ray_color = ft_pixel(0, 255, 255, 255);
+        // Draw the ray (assuming mlx_draw_line is your function to draw the ray)
+        mlx_draw_line(game, 1);
+
+        // Increment the ray angle for the next ray
+        game->ray.ra += angle_step;
+    }
 }

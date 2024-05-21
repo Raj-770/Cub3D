@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:26:50 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/18 13:27:28 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/05/21 12:50:00 by fnikzad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,5 +132,11 @@ void	draw_map_2d(void *param);
 void	draw_square_2(t_cub *game, int start_x, int start_y, int color);
 void	draw_player(t_cub *game);
 int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
+
+void	draw_rays_vertical(t_cub *game);
+// void	find_horizontal(t_cub *game);
+// void	find_vertical(t_cub *game);
+void cast_rays(t_cub *game);
+
 
 #endif

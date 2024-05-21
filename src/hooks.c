@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 17:01:47 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/18 13:24:20 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/05/21 12:50:03 by fnikzad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ void	ft_hook(void *param)
 	t_cub	*game;
 
 	game = param;
-	// draw_rays(game);
+
+	cast_rays(game);
+
 	if (mlx_is_key_down(game->mlx_ptr, MLX_KEY_ESCAPE))
 		mlx_close_window(game->mlx_ptr);
 	game->player->pdx = cos(game->player->p_a);

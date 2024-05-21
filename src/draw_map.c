@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 14:53:56 by fnikzad           #+#    #+#             */
-/*   Updated: 2024/05/18 11:03:29 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/05/21 12:41:54 by fnikzad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	draw_map_2d(void *param)
 		}
 	}
 	draw_player(game);
-	mlx_draw_line(game, 0);
+	// mlx_draw_line(game, 0);
 }
 
 int	control_player(t_cub *game)
