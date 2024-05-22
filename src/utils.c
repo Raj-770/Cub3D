@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:18:46 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/16 17:38:05 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/05/21 18:49:37 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,9 @@ double	calculate_block_size(int sw, int sh, int mw, int mh)
 	else
 		block_size = block_size_height;
 	return (block_size);
+}
+
+double	degrees_to_radians(double degrees)
+{
+	return degrees * (PI / 180.0);
 }

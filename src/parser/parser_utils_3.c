@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:00:55 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/18 13:27:08 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/05/21 18:51:21 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,14 @@ static int	check_character(t_map_data *data, int i, int j, int *player_count)
 		data->start_py = i;
 		data->start_px = j;
 		data->map[i][j] = '0';
+		if (c == 'E')
+			degrees_to_radians(0);
+		else if (c == 'N')
+			degrees_to_radians(90);
+		else if (c == 'W')
+			degrees_to_radians(180);
+		else if (c == 'S')
+			degrees_to_radians(270);
 		(*player_count)++;
 	}
 	return (1);

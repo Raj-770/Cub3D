@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:26:50 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/21 14:05:41 by fnikzad          ###   ########.fr       */
+/*   Updated: 2024/05/21 18:49:59 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct s_map_data
 	int		start_py;
 	int		map_height;
 	int		map_width;
+	float	player_angle;
 }	t_map_data;
 
 typedef struct s_cub
@@ -106,6 +107,7 @@ int		add_line_to_map(char *line, t_map_data *data, t_parser *parser);
 int		check_map_rules(t_map_data *data);
 void	mlx_draw_line(t_cub *game, int line_length);
 void	trim_map(t_map_data *data);
+double	degrees_to_radians(double degrees);
 
 // Utils
 int		put_error(char *str, int i);
