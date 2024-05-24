@@ -6,7 +6,7 @@
 /*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:26:50 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/24 17:43:28 by fnikzad          ###   ########.fr       */
+/*   Updated: 2024/05/24 18:16:47 by fnikzad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,10 @@ typedef struct s_player
 typedef struct s_map_data
 {
 	char	**map;
-	char	*no_tex;
-	char	*ea_tex;
-	char	*so_tex;
-	char	*we_tex;
+	void	*no_tex;
+	void	*ea_tex;
+	void	*so_tex;
+	void	*we_tex;
 	int		c_color;
 	int		f_color;
 	int		start_px;
@@ -119,6 +119,7 @@ int		check_map_rules(t_map_data *data);
 void	mlx_draw_line(t_cub *game, int line_length);
 void	trim_map(t_map_data *data);
 double	degrees_to_radians(double degrees);
+int convert_images(t_map_data *data);
 
 // Utils
 int		put_error(char *str, int i);

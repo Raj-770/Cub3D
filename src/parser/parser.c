@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 14:22:08 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/18 13:09:15 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/05/24 17:55:12 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	parser(int argc, char **argv, t_map_data *data)
 	if (!check_for_file_extension(argv[1]))
 		return (put_error("Invalid File Extension", 0));
 	if (!parse_map_file(argv[1], data))
+		return (0);
+	if (!convert_images(data))
 		return (0);
 	return (1);
 }

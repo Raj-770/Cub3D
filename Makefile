@@ -37,7 +37,8 @@ SRCS    := lib/get_next_line/get_next_line.c \
            src/parser/parser_utils_3.c \
            src/utils.c \
            src/hooks.c \
-           src/draw_line.c
+           src/draw_line.c \
+		   src/parser/parser_utils_4.c
 
 OBJDIR  := objs
 OBJS    := $(SRCS:%.c=$(OBJDIR)/%.o)
