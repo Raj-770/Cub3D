@@ -6,7 +6,7 @@
 /*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:05:52 by fnikzad           #+#    #+#             */
-/*   Updated: 2024/05/21 16:56:46 by fnikzad          ###   ########.fr       */
+/*   Updated: 2024/05/24 17:42:37 by fnikzad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,9 +130,11 @@ void find_vertical(t_cub *game, float ray_angle)
 	game->ray.dis_v = INFINITY;
 }
 
+
+
 void cast_rays(t_cub *game)
 {
-	int num_rays = 60;
+	int num_rays = WIDTH;
 	float angle_step = (M_PI / 3) / num_rays;
 		
 	game->ray.ra = game->player->p_a - (M_PI / 6);
@@ -143,21 +145,22 @@ void cast_rays(t_cub *game)
 			game->ray.ra += 2 * M_PI;
 		if (game->ray.ra > 2 * M_PI)
 			game->ray.ra -= 2 * M_PI;
-		
 		find_horizontal(game, game->ray.ra);
 		find_vertical(game, game->ray.ra);
-		
 		if (game->ray.dis_h < game->ray.dis_v)
 		{
 			game->ray.rx = game->ray.hx;
 			game->ray.ry = game->ray.hy;
+			game->ray.dist = game->ray.dis_h;
 		}
 		else
 		{
 			game->ray.rx = game->ray.vx;
 			game->ray.ry = game->ray.vy;
+			game->ray.dist = game->ray.dis_v;
 		}
 		mlx_draw_line(game, 1);
+		three_d(game, i);
 		game->ray.ra += angle_step;
 	}
 }

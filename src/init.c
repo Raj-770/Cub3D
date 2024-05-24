@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 12:32:46 by fnikzad           #+#    #+#             */
-/*   Updated: 2024/05/18 13:04:08 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/05/24 17:34:12 by fnikzad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,10 @@ void	init(t_cub *game)
 
 	game->block_size = calculate_block_size(WIDTH, HEIGHT, \
 	game->data->map_width, game->data->map_height);
+	// game->block_size /= 3;
 	game->player->px = (game->data->start_px * game->block_size) + (game->block_size) / 2;
 	game->player->py = (game->data->start_py * game->block_size) + (game->block_size) / 2;
-	game->player->pdx = cos(game->player->p_a) * 5;
-	game->player->pdy = sin (game->player->p_a) * 5;
+	game->player->pdx = cos(game->player->p_a) * 3;
+	game->player->pdy = sin (game->player->p_a) * 3;
 	game->mlx_ptr = mlx_init(WIDTH, HEIGHT, "cub3d", true);
 }

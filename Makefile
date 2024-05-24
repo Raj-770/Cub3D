@@ -26,6 +26,7 @@ HEADER  := include/cub3d.h
 SRCS    := lib/get_next_line/get_next_line.c \
            lib/get_next_line/get_next_line_utils.c \
            src/main.c \
+		   src/three_d.c \
            src/init.c \
            src/draw_map.c \
            src/draw_rays.c \

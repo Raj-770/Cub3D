@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:26:50 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/21 18:49:59 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/05/24 17:43:28 by fnikzad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,16 @@
 #define HEIGHT 1080
 #define DR 0.0174533
 
+
+typedef struct s_v_line
+{
+	double	begin_x;
+	double	begin_y;
+	double	end_x;
+	double	end_y;
+}	t_v_line;
+
+
 typedef struct s_ray
 {
 	int		r;
@@ -44,6 +54,7 @@ typedef struct s_ray
 	float	vy;
 	float	hx;
 	float	hy;
+	float	dist;
 
 }	t_ray;
 
@@ -135,10 +146,14 @@ void	draw_square_2(t_cub *game, int start_x, int start_y, int color);
 void	draw_player(t_cub *game);
 int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 
-void	draw_rays_vertical(t_cub *game);
 // void	find_horizontal(t_cub *game);
 // void	find_vertical(t_cub *game);
-void cast_rays(t_cub *game);
+void	cast_rays(t_cub *game);
+void	three_d(t_cub *game, int i);
+int		draw_line(mlx_image_t *image, t_v_line line, int color);
+t_v_line	init_line(double beginx, double beginy, double endx, double endy);
+
+
 
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 14:53:56 by fnikzad           #+#    #+#             */
-/*   Updated: 2024/05/21 12:41:54 by fnikzad          ###   ########.fr       */
+/*   Updated: 2024/05/24 17:22:53 by fnikzad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ void	draw_map_2d(void *param)
 		while (game->data->map[y][x])
 		{
 			if (game->data->map[y][x] == '1')
-				color = ft_pixel(255, 255, 255, 255);
+				color = ft_pixel(255, 255, 255, 125);
 			else if (game->data->map[y][x] == '0')
-				color = ft_pixel(0, 0, 0, 255);
+				color = ft_pixel(0, 0, 0, 125);
 			else
 			{
 				x++;
@@ -101,7 +101,7 @@ void	draw_player(t_cub *game)
 	int	color;
 
 	color = ft_pixel(0, 255, 0, 255);
-	size = 8;
+	size = 2;
 	y = game->player->py;
 	while (y < game->player->py + size)
 	{
