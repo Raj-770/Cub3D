@@ -6,7 +6,7 @@
 /*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:05:52 by fnikzad           #+#    #+#             */
-/*   Updated: 2024/05/24 17:42:37 by fnikzad          ###   ########.fr       */
+/*   Updated: 2024/05/31 18:16:57 by fnikzad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,8 +129,6 @@ void find_vertical(t_cub *game, float ray_angle)
 	}
 	game->ray.dis_v = INFINITY;
 }
-
-
 
 void cast_rays(t_cub *game)
 {

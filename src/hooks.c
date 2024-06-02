@@ -6,7 +6,7 @@
 /*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 17:01:47 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/24 17:33:57 by fnikzad          ###   ########.fr       */
+/*   Updated: 2024/05/25 12:48:24 by fnikzad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,14 @@ int is_within_bounds(t_cub *game, float new_px, float new_py)
 
 static void	ft_hook_helper(t_cub *game)
 {
-	if (mlx_is_key_down(game->mlx_ptr, MLX_KEY_A))
+	if (mlx_is_key_down(game->mlx_ptr, MLX_KEY_LEFT))
 	{
 		game->player->p_a -= 0.1;
 		game->player->p_a = fix_ang(game->player->p_a);
 		game->player->pdx = cos(game->player->p_a);
 		game->player->pdy = sin(game->player->p_a);
 	}
-	if (mlx_is_key_down(game->mlx_ptr, MLX_KEY_D))
+	if (mlx_is_key_down(game->mlx_ptr, MLX_KEY_RIGHT))
 	{
 		game->player->p_a += 0.1;
 		game->player->p_a = fix_ang(game->player->p_a);
@@ -62,7 +62,6 @@ static void	ft_hook_helper(t_cub *game)
 		{
 			game->player->px += game->player->pdx * 3;
 			game->player->py += game->player->pdy * 3;
-
 		}
 	}
 	if (mlx_is_key_down(game->mlx_ptr, MLX_KEY_S))
@@ -72,6 +71,29 @@ static void	ft_hook_helper(t_cub *game)
 			game->player->px -= game->player->pdx * 3;
 			game->player->py -= game->player->pdy * 3;
 
+		}
+	}
+	if (mlx_is_key_down(game->mlx_ptr, MLX_KEY_A))
+	{
+		float strafe_angle = game->player->p_a - M_PI_2; // 90 degrees to the left of the player's angle
+		float strafe_dx = cos(strafe_angle) * 3;
+		float strafe_dy = sin(strafe_angle) * 3;
+		if (is_within_bounds(game, game->player->px + strafe_dx, game->player->py + strafe_dy))
+		{
+			game->player->px += strafe_dx;
+			game->player->py += strafe_dy;
+		}
+	}
+	// Strafe right
+	if (mlx_is_key_down(game->mlx_ptr, MLX_KEY_D))
+	{
+		float strafe_angle = game->player->p_a + M_PI_2; // 90 degrees to the right of the player's angle
+		float strafe_dx = cos(strafe_angle) * 3;
+		float strafe_dy = sin(strafe_angle) * 3;
+		if (is_within_bounds(game, game->player->px + strafe_dx, game->player->py + strafe_dy))
+		{
+			game->player->px += strafe_dx;
+			game->player->py += strafe_dy;
 		}
 	}
 }

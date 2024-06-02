@@ -6,7 +6,7 @@
 /*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:26:50 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/24 18:16:47 by fnikzad          ###   ########.fr       */
+/*   Updated: 2024/05/31 18:37:16 by fnikzad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,10 @@ typedef struct s_cub
 	mlx_image_t	*mlx_img;
 	t_map_data	*data;
 	double		block_size;
+
+	int	size_line;
+	int	endian;
+	char *img_data;
 }	t_cub;
 
 typedef struct s_id
@@ -151,7 +155,11 @@ int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 // void	find_vertical(t_cub *game);
 void	cast_rays(t_cub *game);
 void	three_d(t_cub *game, int i);
-int		draw_line(mlx_image_t *image, t_v_line line, int color);
+// int	draw_line(t_cub *game, t_v_line line, void *img);
+int draw_line(t_cub *game, t_v_line line, mlx_texture_t *tex, float dist);
+
+
+
 t_v_line	init_line(double beginx, double beginy, double endx, double endy);
 
 

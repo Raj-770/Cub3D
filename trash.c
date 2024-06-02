@@ -1,143 +1,69 @@
-
-#include "cub3d.h"
-#include "math.h"
-
-float degToRad(int a)
+typedef struct s_texture
 {
-	return (a*( PI/180.0));
-}
+    int     line_height;
+    int     start;
+    int     end;
+    double  wall_x;
+    double  step;
+    int     pxl[2];
+    double  pos;
+}   t_texture;
 
-float distance(ax,ay,bx,by,ang)
-{ 
-	return cos(degToRad(ang))*(bx-ax)-sin(degToRad(ang))*(by-ay);
-}
-
-void	vertical_rays(t_cub *game) 
+typedef struct s_ray
 {
-	float	nTan = -tan(game->ray.ra);
-	game->ray.dof = 0;
-	game->ray.dis_v = 1000000;
-	game->ray.vx = game->player->px;
-	game->ray.vy = game->player->py;
-	if (game->ray.ra > P2 && game->ray.ra < P3)
-	{
-		game->ray.rx = (((int)game->player->px >> 6)<< 6) - 0.0001;
-		game->ray.ry = (game->player->px - game->ray.rx) * nTan + game->player->py;
-		game->ray.xo = -game->block_size;
-		game->ray.yo = - game->ray.xo * nTan;
-	}
-	if (game->ray.ra < P2 || game->ray.ra > P3)
-	{
-		game->ray.rx = (((int)game->player->px >> 6)<< 6) + game->block_size;
-		game->ray.ry = (game->player->px - game->ray.rx) * nTan + game->player->py;
-		game->ray.xo = game->block_size;
-		game->ray.yo = - game->ray.xo * nTan;
-	}
-	if (game->ray.ra == 0 || game->ray.ra == PI)
-	{
-		game->ray.rx = game->player->px;
-		game->ray.ry = game->player->py;
-		game->ray.dof = 8;
-	}
-	while (game->ray.dof < 8)
-	{
-		game->ray.mx = (int)(game->ray.rx) >> 6;
-		game->ray.my = (int)(game->ray.ry) >> 6;
+	double	cam_x;
+	double	dir[2];
+	double	d_dist[2];
+	int		pos[2];
+	double	s_dist[2];
+	int		step[2];
+	int		hit_side[2];
+	int		hit_axis;
+	double	wall_dist;
+	int		wall_hit;
+}	t_ray;
 
-		if (game->ray.mx >= 0 && game->ray.mx < game->data->map_width &&
-			game->ray.my >= 0 && game->ray.my < game->data->map_height)
-		{
-			if (game->ray.mp > 0 && game->data->map[game->ray.my][game->ray.mx] == '1')
-			{
-				game->ray.vx = game->ray.rx;
-				game->ray.vy = game->ray.ry;
-				game->ray.dis_v = distance(game->player->px, game->player->py, game->ray.vx, game->ray.vy, game->ray.ra);
-				game->ray.dof = 8;
-				// break;
-			}
-			else
-			{
-				game->ray.rx += game->ray.xo;
-				game->ray.ry += game->ray.yo;
-				game->ray.dof += 1;
-			}
-		}
-		else
-			break;
-	}
-}
-
-void	draw_rays(t_cub *game)
+typedef struct s_vector
 {
-	int	r;
-	game->ray.ra = game->player->p_a;
-	float	aTan = -1 / tan(game->ray.ra);
-	r = 0;
-	game->ray.dis_h = 1000000;
-	game->ray.hx = game->player->px;
-	game->ray.hy = game->player->py;
-	while (r < 1)
-	{
-		game->ray.dof = 0;
-		if (game->ray.ra > PI)
-		{
-			game->ray.ry = (((int)game->player->py >> 6)<< 6) - 0.0001;
-			game->ray.rx = (game->player->py - game->ray.ry) * aTan + game->player->px;
-			game->ray.yo = -game->block_size;
-			game->ray.xo = - game->ray.yo * aTan;
-		}
-		if (game->ray.ra < PI)
-		{
-			game->ray.ry = (((int)game->player->py >> 6)<< 6) + game->block_size;
-			game->ray.rx = (game->player->py - game->ray.ry) * aTan + game->player->px;
-			game->ray.yo = game->block_size;
-			game->ray.xo = - game->ray.yo * aTan;
-		}
-		if (game->ray.ra == 0 || game->ray.ra == PI)
-		{
-			game->ray.rx = game->player->px;
-			game->ray.ry = game->player->py;
-			game->ray.dof = 8;
-		}
-		while (game->ray.dof < 8)
-		{
-			game->ray.mx = (int)(game->ray.rx) >> 6;
-			game->ray.my = (int)(game->ray.ry) >> 6;
-			game->ray.mp = game->ray.my * game->data->map_width + game->ray.mx;
-			if (game->ray.mx >= 0 && game->ray.mx < game->data->map_width &&
-				game->ray.my >= 0 && game->ray.my < game->data->map_height)
-			{
-				if (game->ray.mp > 0 && game->data->map[game->ray.my][game->ray.mx] == '1')
-				{
-					game->ray.hx = game->ray.rx;
-					game->ray.hy = game->ray.ry;
-					game->ray.dis_h = distance(game->player->px, game->player->py, game->ray.hx, game->ray.hy, game->ray.ra);
-					game->ray.dof = 8;
-					// break;
-				}
-				else
-				{
-					game->ray.rx += game->ray.xo;
-					game->ray.ry += game->ray.yo;
-					game->ray.dof += 1;
-				}
-			}
-			else
-				break;
-		}
-		vertical_rays(game);
-		if (game->ray.dis_v < game->ray.dis_h)
-		{
-			game->ray.rx = game->ray.vx;
-			game->ray.ry = game->ray.vy;
-		}
-		if (game->ray.dis_v > game->ray.dis_h)
-		{
-			game->ray.rx = game->ray.hx;
-			game->ray.ry = game->ray.hy;
-		}
-		mlx_draw_line(game, 1);
-		r++;
-	}
-	// int ray_color = ft_pixel(0, 255, 255, 255);
+	double	x;
+	double	y;
+}	t_vector;
+
+static void set_struct(t_texture *t, t_ray *r, t_vector *vec, t_game_data *g)
+{
+    t->line_height = (g->img->height) / r->wall_dist;
+    t->start = (g->img->height / 2) - (t->line_height / 2);
+    t->end = (g->img->height / 2) + (t->line_height / 2);
+    if (t->start < 0)
+        t->start = 0;
+    if (t->end >= (int)(g->img->height))
+        t->end = g->img->height - 1;
+    if (r->hit_axis == X)
+        t->wall_x = vec[POS].y + (r->wall_dist * r->dir[Y]);
+    else
+        t->wall_x = vec[POS].x + (r->wall_dist * r->dir[X]);
+    t->wall_x -= floor(t->wall_x);
+    t->pxl[X] = (int)(t->wall_x * (double)g->walls[r->wall_hit]->width);
+    if ((r->hit_axis == X && r->dir[X] > 0) \
+    || (r->hit_axis == Y && r->dir[Y] < 0))
+        t->pxl[X] = g->walls[r->wall_hit]->width - t->pxl[X] - 1;
+    t->step = (double)(g->walls[r->wall_hit]->height) / t->line_height;
+    t->pos = (t->start - (g->img->height / 2) + (t->line_height / 2)) * t->step;
+}
+void    paint_walls(t_ray *r, short x, t_vector *vec, t_game_data *g)
+{
+    t_texture       t;
+    int32_t         pxl;
+    mlx_texture_t   *wall;
+    wall = g->walls[r->wall_hit];
+    set_struct(&t, r, vec, g);
+    while (t.start < t.end)
+    {
+        t.pxl[Y] = t.pos;
+        pxl = (t.pxl[Y] * wall->width + t.pxl[X]) * 4;
+        mlx_put_pixel(g->img, x, t.start, ft_color(wall->pixels[pxl + R], \
+        wall->pixels[pxl + G], wall->pixels[pxl + B]));
+        t.pos += t.step;
+        t.start++;
+    }
 }
