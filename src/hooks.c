@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 17:01:47 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/25 12:48:24 by fnikzad          ###   ########.fr       */
+/*   Updated: 2024/06/02 15:20:52 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,27 @@ void	ft_hook(void *param)
 	ft_hook_helper(game);
 }
 
-int is_within_bounds(t_cub *game, float new_px, float new_py)
+int	is_within_bounds(t_cub *game, float new_px, float new_py)
 {
-	int grid_x = (int)(new_px / game->block_size);
-	int grid_y = (int)(new_py / game->block_size);
+	int	grid_x;
+	int	grid_y;
 
-	if (grid_x < 0 || grid_x >= game->data->map_width || grid_y < 0 || grid_y >= game->data->map_height)
-		return 0;
+	grid_x = (int)(new_px / game->block_size);
+	grid_y = (int)(new_py / game->block_size);
+	if (grid_x < 0 || grid_x >= game->data->map_width || \
+	grid_y < 0 || grid_y >= game->data->map_height)
+		return (0);
 	if (game->data->map[grid_y][grid_x] == '1')
-		return 0;
-	return 1;
+		return (0);
+	return (1);
 }
 
 static void	ft_hook_helper(t_cub *game)
 {
+	float	strafe_angle;
+	float	strafe_dx;
+	float	strafe_dy;
+
 	if (mlx_is_key_down(game->mlx_ptr, MLX_KEY_LEFT))
 	{
 		game->player->p_a -= 0.1;
@@ -58,7 +65,8 @@ static void	ft_hook_helper(t_cub *game)
 	}
 	if (mlx_is_key_down(game->mlx_ptr, MLX_KEY_W))
 	{
-		if(is_within_bounds(game, game->player->px + game->player->pdx * 3, game->player->py + game->player->pdy * 3))
+		if (is_within_bounds(game, game->player->px + game->player->pdx * 3, \
+		game->player->py + game->player->pdy * 3))
 		{
 			game->player->px += game->player->pdx * 3;
 			game->player->py += game->player->pdy * 3;
@@ -66,31 +74,32 @@ static void	ft_hook_helper(t_cub *game)
 	}
 	if (mlx_is_key_down(game->mlx_ptr, MLX_KEY_S))
 	{
-		if(is_within_bounds(game, game->player->px - game->player->pdx * 3, game->player->py - game->player->pdy * 3))
+		if (is_within_bounds(game, game->player->px - game->player->pdx * 3, \
+		game->player->py - game->player->pdy * 3))
 		{
 			game->player->px -= game->player->pdx * 3;
 			game->player->py -= game->player->pdy * 3;
-
 		}
 	}
 	if (mlx_is_key_down(game->mlx_ptr, MLX_KEY_A))
 	{
-		float strafe_angle = game->player->p_a - M_PI_2; // 90 degrees to the left of the player's angle
-		float strafe_dx = cos(strafe_angle) * 3;
-		float strafe_dy = sin(strafe_angle) * 3;
-		if (is_within_bounds(game, game->player->px + strafe_dx, game->player->py + strafe_dy))
+		strafe_angle = game->player->p_a - M_PI_2;
+		strafe_dx = cos(strafe_angle) * 3;
+		strafe_dy = sin(strafe_angle) * 3;
+		if (is_within_bounds(game, game->player->px + strafe_dx, \
+		game->player->py + strafe_dy))
 		{
 			game->player->px += strafe_dx;
 			game->player->py += strafe_dy;
 		}
 	}
-	// Strafe right
 	if (mlx_is_key_down(game->mlx_ptr, MLX_KEY_D))
 	{
-		float strafe_angle = game->player->p_a + M_PI_2; // 90 degrees to the right of the player's angle
-		float strafe_dx = cos(strafe_angle) * 3;
-		float strafe_dy = sin(strafe_angle) * 3;
-		if (is_within_bounds(game, game->player->px + strafe_dx, game->player->py + strafe_dy))
+		strafe_angle = game->player->p_a + M_PI_2;
+		strafe_dx = cos(strafe_angle) * 3;
+		strafe_dy = sin(strafe_angle) * 3;
+		if (is_within_bounds(game, game->player->px + strafe_dx, \
+		game->player->py + strafe_dy))
 		{
 			game->player->px += strafe_dx;
 			game->player->py += strafe_dy;

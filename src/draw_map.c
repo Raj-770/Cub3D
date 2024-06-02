@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 14:53:56 by fnikzad           #+#    #+#             */
-/*   Updated: 2024/05/24 17:22:53 by fnikzad          ###   ########.fr       */
+/*   Updated: 2024/06/02 15:09:04 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +69,18 @@ void	draw_map_2d(void *param)
 		}
 	}
 	draw_player(game);
-	// mlx_draw_line(game, 0);
+	mlx_draw_line(game, 0);
 }
 
 int	control_player(t_cub *game)
 {
-	int	y = -1;
+	int	y;
+	int	x;
+
+	y = -1;
 	while (++y < game->data->map_height)
 	{
-		int x = floor(game->player->px / game->block_size);
+		x = floor(game->player->px / game->block_size);
 		while (game->data->map[y][x])
 		{
 			if (game->data->map[y][x] == '1')

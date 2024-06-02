@@ -1,47 +1,46 @@
-NAME    := Cub3D
+NAME	:=	Cub3D
 
 # Compiler
-CC      := cc
-CFLAGS  := -Wextra -Wall -Werror
+cc		:= cc
+CFLAGS	:= -Wextra -Wall -Werror
 
 # MLX42
-LIBMLX  := ./lib/MLX42
-LIBS    := $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
+LIBMLX	:= ./lib/MLX42
+LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 
 # Libft
-LIBFT_PATH := ./lib/libft/
-LIBFT_NAME := libft.a
-LIBFT      := $(LIBFT_PATH)$(LIBFT_NAME)
+LIBFT_PATH	:= ./lib/libft/
+LIBFT_NAME	:= libft.a
+LIBFT		:= $(LIBFT_PATH)$(LIBFT_NAME)
 
 # Includes
-INC     := -I $(LIBMLX)/include/MLX42 \
-           -I include \
-           -I ./lib/libft/ \
-           -I ./lib/get_next_line/ \
-           -I ./lib/ft_printf/
+INC	:=	-I $(LIBMLX)/include/MLX42 \
+		-I include \
+		-I ./lib/libft/ \
+		-I ./lib/get_next_line/ \
+		-I ./lib/ft_printf/
 
 # Header File
 HEADER  := include/cub3d.h
 
-SRCS    := lib/get_next_line/get_next_line.c \
-           lib/get_next_line/get_next_line_utils.c \
-           src/main.c \
-		   src/three_d.c \
-           src/init.c \
-           src/draw_map.c \
-           src/draw_rays.c \
-           src/draw_rays1.c \
-           src/parser/parser.c \
-           src/parser/parser_utils_1.c \
-           src/parser/parser_utils_2.c \
-           src/parser/parser_utils_3.c \
-           src/utils.c \
-           src/hooks.c \
-           src/draw_line.c \
-		   src/parser/parser_utils_4.c
+SRCS	:=	lib/get_next_line/get_next_line.c \
+			lib/get_next_line/get_next_line_utils.c \
+			src/main.c \
+			src/three_d.c \
+			src/init.c \
+			src/draw_map.c \
+			src/draw_rays.c \
+			src/parser/parser.c \
+			src/parser/parser_utils_1.c \
+			src/parser/parser_utils_2.c \
+			src/parser/parser_utils_3.c \
+			src/utils.c \
+			src/hooks.c \
+			src/draw_line.c \
+			src/parser/parser_utils_4.c
 
-OBJDIR  := objs
-OBJS    := $(SRCS:%.c=$(OBJDIR)/%.o)
+OBJDIR	:= objs
+OBJS	:= $(SRCS:%.c=$(OBJDIR)/%.o)
 
 all: libmlx $(LIBFT) $(NAME)
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:18:46 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/24 17:20:33 by fnikzad          ###   ########.fr       */
+/*   Updated: 2024/06/02 15:26:35 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,5 @@ double	calculate_block_size(int sw, int sh, int mw, int mh)
 
 double	degrees_to_radians(double degrees)
 {
-	return degrees * (PI / 180.0);
+	return (degrees * (PI / 180.0));
 }

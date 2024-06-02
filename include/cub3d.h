@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:26:50 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/31 18:37:16 by fnikzad          ###   ########.fr       */
+/*   Updated: 2024/06/02 15:33:51 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,12 @@
 # include <MLX42.h>
 # include <get_next_line.h>
 
-#define	PI 3.1415926535
-#define P2	PI/2
-#define P3	3 * PI / 2
-#define WIDTH 1920
-#define HEIGHT 1080
-#define DR 0.0174533
-
+# define PI 3.1415926535
+# define P2	PI/2
+# define P3	3 * PI / 2
+# define WIDTH 1920
+# define HEIGHT 1080
+# define DR 0.0174533
 
 typedef struct s_v_line
 {
@@ -34,7 +33,6 @@ typedef struct s_v_line
 	double	end_x;
 	double	end_y;
 }	t_v_line;
-
 
 typedef struct s_ray
 {
@@ -91,10 +89,9 @@ typedef struct s_cub
 	mlx_image_t	*mlx_img;
 	t_map_data	*data;
 	double		block_size;
-
-	int	size_line;
-	int	endian;
-	char *img_data;
+	int			size_line;
+	int			endian;
+	char		*img_data;
 }	t_cub;
 
 typedef struct s_id
@@ -116,53 +113,37 @@ typedef struct s_parser
 }	t_parser;
 
 // Parser
-int		parser(int argc, char **argv, t_map_data *data);
-int		parse_map_file_line(char *line, t_map_data *data, t_parser *parser);
-int		add_line_to_map(char *line, t_map_data *data, t_parser *parser);
-int		check_map_rules(t_map_data *data);
-void	mlx_draw_line(t_cub *game, int line_length);
-void	trim_map(t_map_data *data);
-double	degrees_to_radians(double degrees);
-int convert_images(t_map_data *data);
+int			parser(int argc, char **argv, t_map_data *data);
+int			parse_map_file_line(char *line, t_map_data *data, t_parser *parser);
+int			add_line_to_map(char *line, t_map_data *data, t_parser *parser);
+int			check_map_rules(t_map_data *data);
+void		mlx_draw_line(t_cub *game, int line_length);
+void		trim_map(t_map_data *data);
+double		degrees_to_radians(double degrees);
+int			convert_images(t_map_data *data);
 
 // Utils
-int		put_error(char *str, int i);
-void	free_array(char **array);
-void	free_map_data(t_map_data *data);
-double	calculate_block_size(int sw, int sh, int mw, int mh);
+int			put_error(char *str, int i);
+void		free_array(char **array);
+void		free_map_data(t_map_data *data);
+double		calculate_block_size(int sw, int sh, int mw, int mh);
 
 // Init
-void	init_map_data(t_map_data *data);
-void	initialize_parser(t_parser *parser);
+void		init_map_data(t_map_data *data);
+void		initialize_parser(t_parser *parser);
 
 //init
-void	ft_hook(void *param);
-void	display(t_cub *game);
-void	init(t_cub *game);
+void		ft_hook(void *param);
+void		display(t_cub *game);
+void		init(t_cub *game);
 
-void	draw_rays(t_cub *game);
 // Hooks
-void	ft_hook(void *param);
-
-
-void	draw_map_2d(void *param);
-// void	draw_square(t_cub *game, int start_x, int start_y, int color);
-void	draw_square_2(t_cub *game, int start_x, int start_y, int color);
-void	draw_player(t_cub *game);
-int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
-
-// void	find_horizontal(t_cub *game);
-// void	find_vertical(t_cub *game);
-void	cast_rays(t_cub *game);
-void	three_d(t_cub *game, int i);
-// int	draw_line(t_cub *game, t_v_line line, void *img);
-int draw_line(t_cub *game, t_v_line line, mlx_texture_t *tex, float dist);
-
-
-
+void		ft_hook(void *param);
+void		draw_map_2d(void *param);
+void		draw_player(t_cub *game);
+int32_t		ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
+void		cast_rays(t_cub *game);
+void		three_d(t_cub *game, int i);
 t_v_line	init_line(double beginx, double beginy, double endx, double endy);
-
-
-
 
 #endif

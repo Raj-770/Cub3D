@@ -6,13 +6,13 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:55:26 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/24 18:04:50 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/06/02 14:59:40 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int convert_images(t_map_data *data)
+int	convert_images(t_map_data *data)
 {
 	char	*temp;
 
