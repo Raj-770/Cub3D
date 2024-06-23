@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 12:32:46 by fnikzad           #+#    #+#             */
-/*   Updated: 2024/06/02 15:21:19 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/06/23 14:13:03 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,9 @@ void	initialize_parser(t_parser *parser)
 	initialize_identifiers(parser->identifiers);
 }
 
-void	display(t_cub *game)
+void	init_game_data(t_cub *game, t_map_data *data)
 {
-	game->mlx_img = mlx_new_image(game->mlx_ptr, WIDTH, HEIGHT);
-	mlx_image_to_window(game->mlx_ptr, game->mlx_img, 0, 0);
-}
-
-void	init(t_cub *game)
-{
+	game->data = data;
 	game->player = malloc(sizeof(t_player));
 	game->block_size = calculate_block_size(WIDTH, HEIGHT, \
 	game->data->map_width, game->data->map_height);
@@ -65,4 +60,6 @@ void	init(t_cub *game)
 	game->player->pdx = cos(game->player->p_a) * 3;
 	game->player->pdy = sin (game->player->p_a) * 3;
 	game->mlx_ptr = mlx_init(WIDTH, HEIGHT, "cub3d", true);
+	game->mlx_img = mlx_new_image(game->mlx_ptr, WIDTH, HEIGHT);
+	mlx_image_to_window(game->mlx_ptr, game->mlx_img, 0, 0);
 }

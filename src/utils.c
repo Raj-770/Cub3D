@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:18:46 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/06/02 15:26:35 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/06/23 15:28:15 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,15 @@ double	calculate_block_size(int sw, int sh, int mw, int mh)
 		block_size = block_size_width;
 	else
 		block_size = block_size_height;
-	return (block_size / 4);
+	return (block_size);
 }
 
 double	degrees_to_radians(double degrees)
 {
 	return (degrees * (PI / 180.0));
+}
+
+int32_t	ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a)
+{
+	return (r << 24 | g << 16 | b << 8 | a);
 }

@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:05:52 by fnikzad           #+#    #+#             */
-/*   Updated: 2024/06/02 15:13:10 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/06/23 15:40:40 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,7 @@ void	cast_rays(t_cub *game)
 			game->ray.dist = game->ray.dis_v;
 		}
 		mlx_draw_line(game, 1);
-		three_d(game, i);
+		// three_d(game, i);
 		game->ray.ra += angle_step;
 		i++;
 	}

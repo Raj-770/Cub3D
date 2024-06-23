@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:26:50 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/06/02 15:33:51 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/06/23 15:33:09 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,21 +127,21 @@ int			put_error(char *str, int i);
 void		free_array(char **array);
 void		free_map_data(t_map_data *data);
 double		calculate_block_size(int sw, int sh, int mw, int mh);
+int32_t		ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 
 // Init
 void		init_map_data(t_map_data *data);
+void		init_game_data(t_cub *game, t_map_data *data);
 void		initialize_parser(t_parser *parser);
 
-//init
-void		ft_hook(void *param);
-void		display(t_cub *game);
-void		init(t_cub *game);
+// Hooks
+void		handle_keys(mlx_key_data_t key, void *param);
+void		game_hook(void *param);
+
+
+
 
 // Hooks
-void		ft_hook(void *param);
-void		draw_map_2d(void *param);
-void		draw_player(t_cub *game);
-int32_t		ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
 void		cast_rays(t_cub *game);
 void		three_d(t_cub *game, int i);
 t_v_line	init_line(double beginx, double beginy, double endx, double endy);
