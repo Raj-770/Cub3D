@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 12:32:46 by fnikzad           #+#    #+#             */
-/*   Updated: 2024/06/23 14:13:03 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/06/23 16:19:34 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	init_game_data(t_cub *game, t_map_data *data)
 {
 	game->data = data;
 	game->player = malloc(sizeof(t_player));
+	game->player->p_a = 0;
 	game->block_size = calculate_block_size(WIDTH, HEIGHT, \
 	game->data->map_width, game->data->map_height);
 	game->player->px = (game->data->start_px * game->block_size) + \

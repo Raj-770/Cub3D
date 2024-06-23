@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:42:02 by fnikzad           #+#    #+#             */
-/*   Updated: 2024/06/02 15:26:10 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/06/23 16:22:43 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ int	draw_line_3d(t_cub *game, t_v_line line, mlx_texture_t *tex)
 				uint32_t blue = pixel[2];
 				uint32_t alpha = pixel[3];
 				int color = (alpha << 24) | (red << 16) | (green << 8) | blue;
-
-				mlx_put_pixel(game->mlx_img, (int)pixelx, (int)pixely, color);
+				(void)color;
+				mlx_put_pixel(game->mlx_img, (int)pixelx, (int)pixely, ft_pixel(255, 0, 0, 255));
 			}
 		}
 		pixelx += deltax;
@@ -105,7 +105,7 @@ void	three_d(t_cub *game, int i)
 	line = init_line((0) + i, lineoff, (0) + i, height + lineoff);
 	draw_line_3d(game, line, game->data->no_tex);
 	line = init_line((0) + i, 0, (0) + i, lineoff);
-	draw_line_color(game->mlx_img, line, game->data->c_color);
+	draw_line_color(game->mlx_img, line, ft_pixel(0, 255, 0, 255));
 	line = init_line((0) + i, height + lineoff, (0) + i, HEIGHT);
-	draw_line_color(game->mlx_img, line, game->data->f_color);
+	draw_line_color(game->mlx_img, line, ft_pixel(0, 0, 255, 255));
 }

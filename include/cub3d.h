@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:26:50 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/06/23 15:33:09 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/06/23 17:59:23 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,18 @@ typedef struct s_v_line
 	double	end_x;
 	double	end_y;
 }	t_v_line;
+
+
+typedef struct s_coords
+{
+	float	xn;
+	float	yn;
+	float	xs;
+	float	ys;
+	int		map_x;
+	int		map_y;
+	float	ray_angle;
+}	t_coords;
 
 typedef struct s_ray
 {
@@ -135,14 +147,17 @@ void		init_game_data(t_cub *game, t_map_data *data);
 void		initialize_parser(t_parser *parser);
 
 // Hooks
-void		handle_keys(mlx_key_data_t key, void *param);
 void		game_hook(void *param);
 
+// Draw
+void		draw_map_2d(t_cub *game);
+void		cast_rays(t_cub *game);
 
-
+// Rays
+void	find_horizontal(t_cub *game, float ray_angle);
+void	find_vertical(t_cub *game, float ray_angle);
 
 // Hooks
-void		cast_rays(t_cub *game);
 void		three_d(t_cub *game, int i);
 t_v_line	init_line(double beginx, double beginy, double endx, double endy);
 

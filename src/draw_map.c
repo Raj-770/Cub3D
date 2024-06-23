@@ -6,31 +6,16 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 14:53:56 by fnikzad           #+#    #+#             */
-/*   Updated: 2024/06/23 15:40:31 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/06/23 18:02:46 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	draw_map_2d(t_cub *game);
 static void	draw_player(t_cub *game);
 static void	draw_square(t_cub *game, int start_x, int start_y, int color);
 
-
-void	game_hook(void *param)
-{
-	t_cub	*game;
-	game = param;
-
-	draw_map_2d(game);
-	draw_player(game);
-	mlx_draw_line(game, 0);
-	cast_rays(game);
-	game->player->pdx = cos(game->player->p_a);
-	game->player->pdy = sin(game->player->p_a);
-}
-
-static void	draw_map_2d(t_cub *game)
+void	draw_map_2d(t_cub *game)
 {
 	int		color;
 	int		x;
@@ -55,6 +40,7 @@ static void	draw_map_2d(t_cub *game)
 			x++;
 		}
 	}
+	draw_player(game);
 }
 
 static void	draw_player(t_cub *game)
@@ -132,5 +118,3 @@ int	control_player(t_cub *game)
 	}
 	return (1);
 }
-
-

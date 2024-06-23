@@ -26,18 +26,20 @@ HEADER  := include/cub3d.h
 SRCS	:=	lib/get_next_line/get_next_line.c \
 			lib/get_next_line/get_next_line_utils.c \
 			src/main.c \
-			src/three_d.c \
-			src/init.c \
-			src/draw_map.c \
-			src/draw_rays.c \
 			src/parser/parser.c \
 			src/parser/parser_utils_1.c \
 			src/parser/parser_utils_2.c \
 			src/parser/parser_utils_3.c \
-			src/utils.c \
+			src/parser/parser_utils_4.c \
+			src/init.c \
 			src/hooks.c \
+			src/draw_map.c \
 			src/draw_line.c \
-			src/parser/parser_utils_4.c
+			src/draw_rays.c \
+			src/find_horizontal_rays.c \
+			src/find_vertical_rays.c \
+			src/three_d.c \
+			src/utils.c
 
 OBJDIR	:= objs
 OBJS	:= $(SRCS:%.c=$(OBJDIR)/%.o)
