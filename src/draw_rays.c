@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:05:52 by fnikzad           #+#    #+#             */
-/*   Updated: 2024/06/23 18:00:40 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/06/23 22:03:11 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,13 @@ static void	cast_rays_helper(t_cub *game)
 		game->ray.rx = game->ray.hx;
 		game->ray.ry = game->ray.hy;
 		game->ray.dist = game->ray.dis_h;
+		game->ray.side_flag = 1;
 	}
 	else
 	{
 		game->ray.rx = game->ray.vx;
 		game->ray.ry = game->ray.vy;
 		game->ray.dist = game->ray.dis_v;
+		game->ray.side_flag = 0;
 	}
 }

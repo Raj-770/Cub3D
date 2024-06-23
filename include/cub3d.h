@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:26:50 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/06/23 18:50:09 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/06/23 22:59:41 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,22 @@ typedef struct s_coords
 	float	ray_angle;
 }	t_coords;
 
+typedef struct s_texture
+{
+	double	deltax;
+	double	deltay;
+	int		pixels;
+	double	pixelx;
+	double	pixely;
+	double	wall_hit_x;
+	double	texture_x;
+	double	texture_step;
+	double	texture_pos;
+	int		texture_y;
+	int		texture_pixel_index;
+	int		color;
+}	t_texture;
+
 typedef struct s_ray
 {
 	int		r;
@@ -65,7 +81,7 @@ typedef struct s_ray
 	float	hx;
 	float	hy;
 	float	dist;
-
+	int	side_flag;
 }	t_ray;
 
 typedef struct s_player
