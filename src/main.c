@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:28:03 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/21 11:05:01 by fnikzad          ###   ########.fr       */
+/*   Updated: 2024/06/23 15:43:20 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(int argc, char **argv)
+int main(int argc, char **argv)
 {
 	t_map_data	map_data;
 	t_cub		game;
@@ -20,11 +20,9 @@ int	main(int argc, char **argv)
 	init_map_data(&map_data);
 	if (!parser(argc, argv, &map_data))
 		return (0);
-	game.data = &map_data;
-	init(&game);
-	display(&game);
-	mlx_loop_hook(game.mlx_ptr, draw_map_2d, &game);
-	mlx_loop_hook(game.mlx_ptr, ft_hook, &game);
+	init_game_data(&game, &map_data);
+	mlx_loop_hook(game.mlx_ptr, game_hook, &game);
+	mlx_key_hook(game.mlx_ptr, handle_keys, &game);
 	mlx_loop(game.mlx_ptr);
 	free_map_data(&map_data);
 	return (0);
