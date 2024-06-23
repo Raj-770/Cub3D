@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:26:50 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/06/23 17:59:23 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/06/23 18:50:09 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,8 @@ int			put_error(char *str, int i);
 void		free_array(char **array);
 void		free_map_data(t_map_data *data);
 double		calculate_block_size(int sw, int sh, int mw, int mh);
-int32_t		ft_pixel(int32_t r, int32_t g, int32_t b, int32_t a);
+int			ft_pixel(int r, int g, int b, int a);
+double		fix_ang(double ang);
 
 // Init
 void		init_map_data(t_map_data *data);
@@ -148,16 +149,13 @@ void		initialize_parser(t_parser *parser);
 
 // Hooks
 void		game_hook(void *param);
+void		handle_keys(t_cub *game);
 
 // Draw
 void		draw_map_2d(t_cub *game);
 void		cast_rays(t_cub *game);
-
-// Rays
-void	find_horizontal(t_cub *game, float ray_angle);
-void	find_vertical(t_cub *game, float ray_angle);
-
-// Hooks
+void		find_horizontal(t_cub *game, float ray_angle);
+void		find_vertical(t_cub *game, float ray_angle);
 void		three_d(t_cub *game, int i);
 t_v_line	init_line(double beginx, double beginy, double endx, double endy);
 

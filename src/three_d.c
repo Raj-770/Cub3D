@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:42:02 by fnikzad           #+#    #+#             */
-/*   Updated: 2024/06/23 18:31:35 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/06/23 18:37:55 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ int	draw_line_3d(t_cub *game, t_v_line line, mlx_texture_t *tex)
 	double pixely = line.begin_y;
 	deltax /= pixels;
 	deltay /= pixels;
-
 	while (pixels > 0)
 	{
 		if (pixelx >= 0 && pixelx < WIDTH && pixely >= 0 && pixely < HEIGHT)
