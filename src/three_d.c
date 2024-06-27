@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:42:02 by fnikzad           #+#    #+#             */
-/*   Updated: 2024/06/23 23:11:48 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/06/27 13:57:06 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int	draw_line_color(mlx_image_t *image, t_v_line line, int color)
 	deltay = line.end_y - line.begin_y;
 	deltax = line.end_x - line.begin_x;
 	pixels = sqrt((deltax * deltax) + (deltay * deltay));
+	if (pixels == -2147483648)
+		pixels = 0;
 	pixelx = line.begin_x;
 	pixely = line.begin_y;
 	deltax /= pixels;
@@ -100,7 +102,8 @@ t_v_line line)
 		tex_data->wall_hit_x = game->ray.ry;
 	tex_data->texture_x = (tex_data->wall_hit_x - (int)(tex_data->wall_hit_x / \
 	game->block_size) * game->block_size) / game->block_size * tex->width;
-	tex_data->texture_step = (double)tex->height / (line.end_y - line.begin_y);
+	if (line.end_y - line.begin_y != 0)
+		tex_data->texture_step = (double)tex->height / (line.end_y - line.begin_y);
 	tex_data->texture_pos = 0;
 }
 
@@ -119,15 +122,13 @@ void	three_d(t_cub *game, int i)
 		ca -= 2 * PI;
 	game->ray.dist = game->ray.dist * cos(ca);
 	height = (HEIGHT * game->block_size) / game->ray.dist;
-	if (height > HEIGHT)
-		height = HEIGHT;
 	lineoff = HEIGHT / 2 - height / 2;
-	line = init_line((0) + i, lineoff, (0) + i, height + lineoff);
+	line = init_line(i, lineoff,i, height + lineoff);
 	set_tex(game, &tex);
 	draw_line_3d(game, line, tex);
-	line = init_line((0) + i, 0, (0) + i, lineoff);
+	line = init_line(i, 0,i, lineoff);
 	draw_line_color(game->mlx_img, line, ft_pixel(0, 255, 0, 255));
-	line = init_line((0) + i, height + lineoff, (0) + i, HEIGHT);
+	line = init_line(i, height + lineoff, i, HEIGHT);
 	draw_line_color(game->mlx_img, line, ft_pixel(0, 0, 255, 255));
 }
 

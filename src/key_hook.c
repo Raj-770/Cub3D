@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 18:41:38 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/06/23 18:50:30 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/06/27 13:19:18 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ static void	handle_keys_helper_1(t_cub *game)
 {
 	if (mlx_is_key_down(game->mlx_ptr, MLX_KEY_W))
 	{
-		if (is_within_bounds(game, game->player->px + game->player->pdx * 7, \
-		game->player->py + game->player->pdy * 7))
+		if (is_within_bounds(game, game->player->px + game->player->pdx * 10, \
+		game->player->py + game->player->pdy * 10))
 		{
 			game->player->px += game->player->pdx * 3;
 			game->player->py += game->player->pdy * 3;
@@ -52,8 +52,8 @@ static void	handle_keys_helper_1(t_cub *game)
 	}
 	if (mlx_is_key_down(game->mlx_ptr, MLX_KEY_S))
 	{
-		if (is_within_bounds(game, game->player->px - game->player->pdx * 7, \
-		game->player->py - game->player->pdy * 7))
+		if (is_within_bounds(game, game->player->px - game->player->pdx * 10, \
+		game->player->py - game->player->pdy * 10))
 		{
 			game->player->px -= game->player->pdx * 3;
 			game->player->py -= game->player->pdy * 3;
@@ -68,8 +68,8 @@ static void	handle_keys_helper_2(t_cub *game)
 	if (mlx_is_key_down(game->mlx_ptr, MLX_KEY_A))
 	{
 		strafe_angle = game->player->p_a - M_PI_2;
-		if (is_within_bounds(game, game->player->px + cos(strafe_angle) * 7, \
-		game->player->py + sin(strafe_angle) * 7))
+		if (is_within_bounds(game, game->player->px + cos(strafe_angle) * 10, \
+		game->player->py + sin(strafe_angle) * 10))
 		{
 			game->player->px += cos(strafe_angle) * 3;
 			game->player->py += sin(strafe_angle) * 3;
@@ -78,8 +78,8 @@ static void	handle_keys_helper_2(t_cub *game)
 	if (mlx_is_key_down(game->mlx_ptr, MLX_KEY_D))
 	{
 		strafe_angle = game->player->p_a + M_PI_2;
-		if (is_within_bounds(game, game->player->px + cos(strafe_angle) * 3, \
-		game->player->py + sin(strafe_angle) * 3))
+		if (is_within_bounds(game, game->player->px + cos(strafe_angle) * 10, \
+		game->player->py + sin(strafe_angle) * 10))
 		{
 			game->player->px += cos(strafe_angle) * 3;
 			game->player->py += sin(strafe_angle) * 3;
