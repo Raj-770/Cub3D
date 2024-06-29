@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 16:29:24 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/14 18:15:26 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/06/29 15:37:47 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_strncmp(const char *str1, const char *str2, size_t n)
 	size_t	i;
 
 	i = 0;
-	while (i < n && (str1[i] != '\0' || str2[i] != '\0') )
+	while (i < n && (str1[i] != '\0' || str2[i] != '\0'))
 	{
 		if (str1[i] != str2[i])
 		{

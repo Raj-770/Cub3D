@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:26:50 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/06/23 22:59:41 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/06/29 15:37:12 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,6 @@
 # include <MLX42.h>
 # include <get_next_line.h>
 
-# define PI 3.1415926535
-# define P2	PI/2
-# define P3	3 * PI / 2
 # define WIDTH 1920
 # define HEIGHT 1080
 # define DR 0.0174533
@@ -33,7 +30,6 @@ typedef struct s_v_line
 	double	end_x;
 	double	end_y;
 }	t_v_line;
-
 
 typedef struct s_coords
 {
@@ -81,13 +77,13 @@ typedef struct s_ray
 	float	hx;
 	float	hy;
 	float	dist;
-	int	side_flag;
+	int		side_flag;
 }	t_ray;
 
 typedef struct s_player
 {
-	int		px;
-	int		py;
+	float	px;
+	float	py;
 	float	pdx;
 	float	pdy;
 	float	p_a;
@@ -162,6 +158,8 @@ double		fix_ang(double ang);
 void		init_map_data(t_map_data *data);
 void		init_game_data(t_cub *game, t_map_data *data);
 void		initialize_parser(t_parser *parser);
+void		init_tex_data(t_texture *tex_data, t_cub *game, mlx_texture_t *tex, \
+t_v_line line);
 
 // Hooks
 void		game_hook(void *param);

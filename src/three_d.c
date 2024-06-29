@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:42:02 by fnikzad           #+#    #+#             */
-/*   Updated: 2024/06/27 13:57:06 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/06/29 15:36:08 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,28 +85,6 @@ int	draw_line_3d(t_cub *game, t_v_line line, mlx_texture_t *tex)
 	return (true);
 }
 
-void	init_tex_data(t_texture *tex_data, t_cub *game, mlx_texture_t *tex, \
-t_v_line line)
-{
-	tex_data->deltax = line.end_x - line.begin_x;
-	tex_data->deltay = line.end_y - line.begin_y;
-	tex_data->pixels = (int)sqrt((tex_data->deltax * tex_data->deltax) + \
-	(tex_data->deltay * tex_data->deltay));
-	tex_data->pixelx = line.begin_x;
-	tex_data->pixely = line.begin_y;
-	tex_data->deltax /= tex_data->pixels;
-	tex_data->deltay /= tex_data->pixels;
-	if (game->ray.side_flag == 1)
-		tex_data->wall_hit_x = game->ray.rx;
-	else
-		tex_data->wall_hit_x = game->ray.ry;
-	tex_data->texture_x = (tex_data->wall_hit_x - (int)(tex_data->wall_hit_x / \
-	game->block_size) * game->block_size) / game->block_size * tex->width;
-	if (line.end_y - line.begin_y != 0)
-		tex_data->texture_step = (double)tex->height / (line.end_y - line.begin_y);
-	tex_data->texture_pos = 0;
-}
-
 void	three_d(t_cub *game, int i)
 {
 	t_v_line		line;
@@ -117,16 +95,16 @@ void	three_d(t_cub *game, int i)
 
 	ca = game->player->p_a - game->ray.ra;
 	if (ca < 0)
-		ca += 2 * PI;
-	if (ca > 2 * PI)
-		ca -= 2 * PI;
+		ca += 2 * M_PI;
+	if (ca > 2 * M_PI)
+		ca -= 2 * M_PI;
 	game->ray.dist = game->ray.dist * cos(ca);
 	height = (HEIGHT * game->block_size) / game->ray.dist;
 	lineoff = HEIGHT / 2 - height / 2;
-	line = init_line(i, lineoff,i, height + lineoff);
+	line = init_line(i, lineoff, i, height + lineoff);
 	set_tex(game, &tex);
 	draw_line_3d(game, line, tex);
-	line = init_line(i, 0,i, lineoff);
+	line = init_line(i, 0, i, lineoff);
 	draw_line_color(game->mlx_img, line, ft_pixel(0, 255, 0, 255));
 	line = init_line(i, height + lineoff, i, HEIGHT);
 	draw_line_color(game->mlx_img, line, ft_pixel(0, 0, 255, 255));

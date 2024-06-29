@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooks.c                                            :+:      :+:    :+:   */
+/*   game_hook.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 14:28:28 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/06/23 18:47:46 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/06/29 15:35:45 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ void	game_hook(void *param)
 
 	game = param;
 	handle_keys(game);
-	// draw_map_2d(game);
-	// mlx_draw_line(game, 0);
 	cast_rays(game);
 	game->player->pdx = cos(game->player->p_a);
 	game->player->pdy = sin(game->player->p_a);
@@ -27,10 +25,10 @@ void	game_hook(void *param)
 
 double	fix_ang(double ang)
 {
-	if (ang > (2 * PI))
-		ang -= (2 * PI);
+	if (ang > (2 * M_PI))
+		ang -= (2 * M_PI);
 	if (ang < 0)
-		ang += (2 * PI);
+		ang += (2 * M_PI);
 	return (ang);
 }
 

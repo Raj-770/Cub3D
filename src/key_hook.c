@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 18:41:38 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/06/27 13:19:18 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/06/29 15:32:29 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ void	handle_keys(t_cub *game)
 		exit_mlx(game);
 	if (mlx_is_key_down(game->mlx_ptr, MLX_KEY_LEFT))
 	{
-		game->player->p_a -= 0.1;
+		game->player->p_a -= 0.03;
 		game->player->p_a = fix_ang(game->player->p_a);
 		game->player->pdx = cos(game->player->p_a);
 		game->player->pdy = sin(game->player->p_a);
 	}
 	if (mlx_is_key_down(game->mlx_ptr, MLX_KEY_RIGHT))
 	{
-		game->player->p_a += 0.1;
+		game->player->p_a += 0.03;
 		game->player->p_a = fix_ang(game->player->p_a);
 		game->player->pdx = cos(game->player->p_a);
 		game->player->pdy = sin(game->player->p_a);
@@ -46,8 +46,8 @@ static void	handle_keys_helper_1(t_cub *game)
 		if (is_within_bounds(game, game->player->px + game->player->pdx * 10, \
 		game->player->py + game->player->pdy * 10))
 		{
-			game->player->px += game->player->pdx * 3;
-			game->player->py += game->player->pdy * 3;
+			game->player->px += game->player->pdx * 1.5;
+			game->player->py += game->player->pdy * 1.5;
 		}
 	}
 	if (mlx_is_key_down(game->mlx_ptr, MLX_KEY_S))
@@ -55,8 +55,8 @@ static void	handle_keys_helper_1(t_cub *game)
 		if (is_within_bounds(game, game->player->px - game->player->pdx * 10, \
 		game->player->py - game->player->pdy * 10))
 		{
-			game->player->px -= game->player->pdx * 3;
-			game->player->py -= game->player->pdy * 3;
+			game->player->px -= game->player->pdx * 1.5;
+			game->player->py -= game->player->pdy * 1.5;
 		}
 	}
 }
@@ -71,8 +71,8 @@ static void	handle_keys_helper_2(t_cub *game)
 		if (is_within_bounds(game, game->player->px + cos(strafe_angle) * 10, \
 		game->player->py + sin(strafe_angle) * 10))
 		{
-			game->player->px += cos(strafe_angle) * 3;
-			game->player->py += sin(strafe_angle) * 3;
+			game->player->px += cos(strafe_angle) * 1.5;
+			game->player->py += sin(strafe_angle) * 1.5;
 		}
 	}
 	if (mlx_is_key_down(game->mlx_ptr, MLX_KEY_D))
@@ -81,8 +81,8 @@ static void	handle_keys_helper_2(t_cub *game)
 		if (is_within_bounds(game, game->player->px + cos(strafe_angle) * 10, \
 		game->player->py + sin(strafe_angle) * 10))
 		{
-			game->player->px += cos(strafe_angle) * 3;
-			game->player->py += sin(strafe_angle) * 3;
+			game->player->px += cos(strafe_angle) * 1.5;
+			game->player->py += sin(strafe_angle) * 1.5;
 		}
 	}
 }
