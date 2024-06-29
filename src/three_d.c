@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:42:02 by fnikzad           #+#    #+#             */
-/*   Updated: 2024/06/29 15:36:08 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/06/29 15:46:10 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,14 +114,14 @@ static void	set_tex(t_cub *game, mlx_texture_t **tex)
 {
 	if (game->ray.side_flag == 1)
 	{
-		if (game->ray.ry < game->player->py)
-			*tex = game->data->no_tex;
-		else
+		if (game->ray.ra > M_PI)
 			*tex = game->data->so_tex;
+		else
+			*tex = game->data->no_tex;
 	}
 	else
 	{
-		if (game->ray.rx < game->player->px)
+		if (game->ray.ra > M_PI_2 && game->ray.ra < M_PI_2 * 3)
 			*tex = game->data->we_tex;
 		else
 			*tex = game->data->ea_tex;
