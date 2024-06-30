@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:26:50 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/06/29 15:37:12 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/06/30 14:10:03 by fnikzad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ typedef struct s_cub
 	t_ray		ray;
 	mlx_image_t	*mlx_img;
 	t_map_data	*data;
-	double		block_size;
+	int			block_size;
 	int			size_line;
 	int			endian;
 	char		*img_data;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hook.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 18:41:38 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/06/29 15:32:29 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/06/30 14:28:59 by fnikzad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,14 @@ void	handle_keys(t_cub *game)
 
 static void	handle_keys_helper_1(t_cub *game)
 {
+	float	new_px;
+	float	new_py;
+	
 	if (mlx_is_key_down(game->mlx_ptr, MLX_KEY_W))
 	{
-		if (is_within_bounds(game, game->player->px + game->player->pdx * 10, \
-		game->player->py + game->player->pdy * 10))
+		new_px = game->player->px + game->player->pdx * 3;
+		new_py = game->player->py + game->player->pdy * 3;
+		if (is_within_bounds(game, new_px, new_py))
 		{
 			game->player->px += game->player->pdx * 1.5;
 			game->player->py += game->player->pdy * 1.5;
@@ -52,8 +56,9 @@ static void	handle_keys_helper_1(t_cub *game)
 	}
 	if (mlx_is_key_down(game->mlx_ptr, MLX_KEY_S))
 	{
-		if (is_within_bounds(game, game->player->px - game->player->pdx * 10, \
-		game->player->py - game->player->pdy * 10))
+		new_px = game->player->px - game->player->pdx * 3;
+		new_py = game->player->py - game->player->pdy * 3;
+		if (is_within_bounds(game, new_px, new_py))
 		{
 			game->player->px -= game->player->pdx * 1.5;
 			game->player->py -= game->player->pdy * 1.5;
@@ -64,12 +69,14 @@ static void	handle_keys_helper_1(t_cub *game)
 static void	handle_keys_helper_2(t_cub *game)
 {
 	float	strafe_angle;
-
+	float	new_px;
+	float	new_py;
 	if (mlx_is_key_down(game->mlx_ptr, MLX_KEY_A))
 	{
 		strafe_angle = game->player->p_a - M_PI_2;
-		if (is_within_bounds(game, game->player->px + cos(strafe_angle) * 10, \
-		game->player->py + sin(strafe_angle) * 10))
+		new_px = game->player->px + cos(strafe_angle) * 3;
+		new_py = game->player->py + sin(strafe_angle) * 3;
+		if (is_within_bounds(game, new_px, new_py))
 		{
 			game->player->px += cos(strafe_angle) * 1.5;
 			game->player->py += sin(strafe_angle) * 1.5;
@@ -78,8 +85,9 @@ static void	handle_keys_helper_2(t_cub *game)
 	if (mlx_is_key_down(game->mlx_ptr, MLX_KEY_D))
 	{
 		strafe_angle = game->player->p_a + M_PI_2;
-		if (is_within_bounds(game, game->player->px + cos(strafe_angle) * 10, \
-		game->player->py + sin(strafe_angle) * 10))
+		new_px = game->player->px + cos(strafe_angle) * 3;
+		new_py = game->player->py + sin(strafe_angle) * 3;
+		if (is_within_bounds(game, new_px, new_py))
 		{
 			game->player->px += cos(strafe_angle) * 1.5;
 			game->player->py += sin(strafe_angle) * 1.5;
