@@ -6,7 +6,7 @@
 /*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/23 18:41:38 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/06/30 14:28:59 by fnikzad          ###   ########.fr       */
+/*   Updated: 2024/07/02 19:25:56 by fnikzad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	handle_keys_helper_1(t_cub *game)
 {
 	float	new_px;
 	float	new_py;
-	
+
 	if (mlx_is_key_down(game->mlx_ptr, MLX_KEY_W))
 	{
 		new_px = game->player->px + game->player->pdx * 3;
@@ -71,6 +71,7 @@ static void	handle_keys_helper_2(t_cub *game)
 	float	strafe_angle;
 	float	new_px;
 	float	new_py;
+
 	if (mlx_is_key_down(game->mlx_ptr, MLX_KEY_A))
 	{
 		strafe_angle = game->player->p_a - M_PI_2;
@@ -85,9 +86,8 @@ static void	handle_keys_helper_2(t_cub *game)
 	if (mlx_is_key_down(game->mlx_ptr, MLX_KEY_D))
 	{
 		strafe_angle = game->player->p_a + M_PI_2;
-		new_px = game->player->px + cos(strafe_angle) * 3;
-		new_py = game->player->py + sin(strafe_angle) * 3;
-		if (is_within_bounds(game, new_px, new_py))
+		if (is_within_bounds(game, game->player->px + cos(strafe_angle) * 3, \
+		game->player->py + sin(strafe_angle) * 3))
 		{
 			game->player->px += cos(strafe_angle) * 1.5;
 			game->player->py += sin(strafe_angle) * 1.5;

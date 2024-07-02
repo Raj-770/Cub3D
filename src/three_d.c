@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   three_d.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:42:02 by fnikzad           #+#    #+#             */
-/*   Updated: 2024/06/29 15:46:10 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/07/01 14:16:54 by fnikzad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,9 @@ void	three_d(t_cub *game, int i)
 	set_tex(game, &tex);
 	draw_line_3d(game, line, tex);
 	line = init_line(i, 0, i, lineoff);
-	draw_line_color(game->mlx_img, line, ft_pixel(0, 255, 0, 255));
+	draw_line_color(game->mlx_img, line, game->data->c_color);
 	line = init_line(i, height + lineoff, i, HEIGHT);
-	draw_line_color(game->mlx_img, line, ft_pixel(0, 0, 255, 255));
+	draw_line_color(game->mlx_img, line, game->data->f_color);
 }
 
 static void	set_tex(t_cub *game, mlx_texture_t **tex)

@@ -1,4 +1,4 @@
-NAME	:=	Cub3D
+NAME	:=	cub3D
 
 # Compiler
 cc		:= cc

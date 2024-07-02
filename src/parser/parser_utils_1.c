@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils_1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:18:00 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/18 13:10:30 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/07/01 14:20:48 by fnikzad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static int	parse_color(char *line, t_id *id, t_map_data *data)
 	free_array(color_array);
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
 		return (put_error("Color values out of range", 0));
-	color = (r << 16) | (g << 8) | b;
+	color = (r << 24) | (g << 16) | b << 8 | 255;
 	if (ft_strcmp(id->prefix, "C ") == 0)
 		data->c_color = color;
 	else if (ft_strcmp(id->prefix, "F ") == 0)

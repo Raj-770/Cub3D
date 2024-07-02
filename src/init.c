@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 12:32:46 by fnikzad           #+#    #+#             */
-/*   Updated: 2024/06/29 15:33:46 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/07/01 14:14:39 by fnikzad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	init_map_data(t_map_data *data)
 {
-	data->c_color = 0;
-	data->f_color = 0;
+	data->c_color = -1;
+	data->f_color = -1;
 	data->map = NULL;
 	data->map_height = 0;
 	data->start_px = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 14:22:08 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/24 17:55:12 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/07/02 19:24:39 by fnikzad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ static int	parse_map_file(char *path, t_map_data *data)
 
 static int	check_identifiers(t_map_data *data)
 {
-	if (!data->c_color || !data->f_color || !data->no_tex || !data->so_tex \
-	|| !data->ea_tex || !data->we_tex || !data->map)
+	if (data->c_color == -1 || data->f_color == -1 || !data->no_tex \
+	|| !data->so_tex || !data->ea_tex || !data->we_tex || !data->map)
 		return (put_error("Missing Identifier", 0));
 	return (1);
 }
