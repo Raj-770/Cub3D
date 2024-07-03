@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils_1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:18:00 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/07/01 14:20:48 by fnikzad          ###   ########.fr       */
+/*   Updated: 2024/07/03 14:05:30 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,17 @@
 
 static int	parse_textures_and_colors(char *line, t_id *id, t_map_data *data);
 static int	parse_color(char *line, t_id *id, t_map_data *data);
+static int 	found_all_identifiers(t_map_data *data);
 
 int	parse_map_file_line(char *line, t_map_data *data, t_parser *parser)
 {
 	int		i;
+	int		count;
 	t_id	*identifier;
 
 	identifier = parser->identifiers;
 	i = 0;
+	count = 0;
 	while (i < 6)
 	{
 		if (ft_strncmp(line, identifier[i].prefix, identifier[i].length) == 0)
@@ -33,9 +36,20 @@ int	parse_map_file_line(char *line, t_map_data *data, t_parser *parser)
 				return (0);
 			return (1);
 		}
+		else
+			count++;
 		i++;
 	}
+	if (count == 6 && !found_all_identifiers(data) && ft_strlen(line) != 0)
+			return (put_error("Identifiers not found", 0));
 	return (add_line_to_map(line, data, parser));
+}
+
+static int 	found_all_identifiers(t_map_data *data)
+{
+	if (data->c_color == -1 || data->f_color == -1 || !data->no_tex \
+	|| !data->so_tex || !data->ea_tex || !data->we_tex)
+		return (0);
 	return (1);
 }
 

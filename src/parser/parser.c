@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 14:22:08 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/07/02 19:24:39 by fnikzad          ###   ########.fr       */
+/*   Updated: 2024/07/03 13:46:51 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int	parse_map_file(char *path, t_map_data *data)
 		free(parser.line);
 		free(parser.trimed_line);
 	}
-	if (!check_map_rules(data) || !check_identifiers(data))
+	if (!check_identifiers(data) || !check_map_rules(data))
 		return (0);
 	close(parser.fd);
 	return (1);
