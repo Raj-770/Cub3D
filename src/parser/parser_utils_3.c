@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:00:55 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/06/29 15:29:12 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/07/06 14:12:09 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ static int	check_open_lines(t_map_data *data)
 			free(trimed_line);
 			return (0);
 		}
+		free(trimed_line);
 		i++;
 	}
 	return (1);

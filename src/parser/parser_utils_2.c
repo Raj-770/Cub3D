@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 11:38:04 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/05/18 13:26:40 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/07/06 14:11:52 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static char	**ft_realloc_map(char **map, t_parser *parser);
 
 int	add_line_to_map(char *line, t_map_data *data, t_parser *parser)
 {
+	if (ft_strlen(line) == 0)
+		return (1);
 	if (!data->map)
 	{
 		data->map = (char **)malloc(sizeof(char *) * parser->map_capacity);
