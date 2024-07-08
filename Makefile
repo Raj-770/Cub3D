@@ -31,6 +31,7 @@ SRCS	:=	lib/get_next_line/get_next_line.c \
 			src/parser/parser_utils_2.c \
 			src/parser/parser_utils_3.c \
 			src/parser/parser_utils_4.c \
+			src/parser/string_array_utils.c \
 			src/init.c \
 			src/game_hook.c \
 			src/key_hook.c \

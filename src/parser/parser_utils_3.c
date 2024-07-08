@@ -6,18 +6,45 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:00:55 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/07/06 14:12:09 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/07/08 11:10:47 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+static int	check_map_characters(t_map_data *data);
 static int	check_character(t_map_data *data, int i, int j, int *player_count);
-static int	check_for_openings(t_map_data *data);
-static int	check_open_lines(t_map_data *data);
-static int	check_for_opeings_helper(int i, int j, int len, t_map_data *data);
+static bool	flood_fill(t_map_data *data, int x, int y, char c);
+static void	reset_map(t_map_data *data, char **temp);
 
 int	check_map_rules(t_map_data *data)
+{
+	char	**dup_map;
+	int		i;
+	int		len;
+
+	if (!check_map_characters(data))
+		return (put_error("Invalid Map!", 0));
+	dup_map = duplicate_string_array(data->map);
+	if (!flood_fill(data, data->start_px, data->start_py, '-'))
+	{
+		free_string_array(dup_map);
+		return(put_error("Invalid Map!", 0));
+	}
+	reset_map(data, dup_map);
+	i = 0;
+	while (i < data->map_height)
+	{
+		len = ft_strlen(data->map[i]);
+		if (data->map_width < len)
+			data->map_width = len;
+		i++;
+	}
+	free_string_array(dup_map);
+	return (1);
+}
+
+static int	check_map_characters(t_map_data *data)
 {
 	int	i;
 	int	j;
@@ -41,8 +68,6 @@ int	check_map_rules(t_map_data *data)
 	}
 	if (player_count != 1)
 		return (put_error("Invalid number of player start position", 0));
-	if (!check_for_openings(data))
-		return (0);
 	return (1);
 }
 
@@ -72,69 +97,36 @@ static int	check_character(t_map_data *data, int i, int j, int *player_count)
 	return (1);
 }
 
-static int	check_for_openings(t_map_data *data)
+static bool	flood_fill(t_map_data *data, int x, int y, char c)
+{
+	bool	up;
+	bool	down;
+	bool	left;
+	bool	right;
+
+	if (y < 0 || y >= data->map_height || x < 0 || x >= (int)ft_strlen(data->map[y]))
+		return (false);
+	if (data->map[y][x] && (data->map[y][x] == '1' || data->map[y][x] == c))
+		return (true);
+	if (data->map[y][x] && data->map[y][x] == ' ')
+		return (false);
+	data->map[y][x] = c;
+	up = flood_fill(data, x, y - 1, c);
+	down = flood_fill(data, x, y + 1, c);
+	left = flood_fill(data, x - 1, y, c);
+	right = flood_fill(data, x + 1, y, c);
+	return (up && down && left && right);
+}
+
+static void	reset_map(t_map_data *data, char **temp)
 {
 	int	i;
-	int	j;
-	int	len;
-
-	i = -1;
-	if (!check_open_lines(data))
-		return (put_error("The map has openings", 0));
-	while (++i < data->map_height)
-	{
-		j = -1;
-		len = ft_strlen(data->map[i]);
-		while (++j < len)
-		{
-			if (!check_for_opeings_helper(i, j, len, data))
-				return (put_error("The map has an opening", 0));
-		}
-	}
-	return (1);
-}
-
-static int	check_for_opeings_helper(int i, int j, int len, t_map_data *data)
-{
-	if (data->map[i][j] == '0')
-	{
-		if (i == 0 || j >= ft_strlen(data->map[i - 1]) || \
-		data->map[i - 1][j] == ' ' || data->map[i - 1][j] == '\0')
-			return (0);
-		if (i == data->map_height - 1 || j >= ft_strlen(data->map[i + 1]) \
-		|| data->map[i + 1][j] == ' ' || data->map[i + 1][j] == '\0')
-			return (0);
-		if (j == 0 || data->map[i][j - 1] == ' ' \
-		|| data->map[i][j - 1] == '\0')
-			return (0);
-		if (j == len - 1 || data->map[i][j + 1] == ' ' \
-		|| data->map[i][j + 1] == '\0')
-			return (0);
-	}
-	return (1);
-}
-
-static int	check_open_lines(t_map_data *data)
-{
-	char	*trimed_line;
-	int		i;
-	int		len;
 
 	i = 0;
 	while (i < data->map_height)
 	{
-		len = ft_strlen(data->map[i]);
-		if (data->map_width < len)
-			data->map_width = len;
-		trimed_line = ft_strtrim(data->map[i], " ");
-		if (!(trimed_line[0] == '1') || \
-		!(trimed_line[ft_strlen(trimed_line) - 1] == '1'))
-		{
-			free(trimed_line);
-			return (0);
-		}
-		free(trimed_line);
+		free(data->map[i]);
+		data->map[i] = ft_strdup(temp[i]);
 		i++;
 	}
-	return (1);
 }

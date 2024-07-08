@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fnikzad <fnikzad@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:26:50 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/06/30 14:10:03 by fnikzad          ###   ########.fr       */
+/*   Updated: 2024/07/08 10:56:35 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,12 @@ void		free_map_data(t_map_data *data);
 double		calculate_block_size(int sw, int sh, int mw, int mh);
 int			ft_pixel(int r, int g, int b, int a);
 double		fix_ang(double ang);
+
+// String array Utils
+char		**duplicate_string_array(char **array);
+void		free_string_array(char **str);
+int			string_array_length(char **array);
+
 
 // Init
 void		init_map_data(t_map_data *data);
