@@ -2,11 +2,12 @@ NO ./textures/brick1.png
 EA ./textures/brick2.png
 SO ./textures/brick3.png
 WE ./textures/brick4.png
-C 0,255,255
+
+C 0,255,100
 F 255,255,0
 
 00001
 000101
-001  01
-0100N001
+0010N01
+01000001
 111111111

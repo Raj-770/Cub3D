@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 17:18:00 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/07/03 14:05:30 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/07/08 13:09:56 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	parse_textures_and_colors(char *line, t_id *id, t_map_data *data);
 static int	parse_color(char *line, t_id *id, t_map_data *data);
-static int 	found_all_identifiers(t_map_data *data);
+static int	found_all_identifiers(t_map_data *data);
 
 int	parse_map_file_line(char *line, t_map_data *data, t_parser *parser)
 {
@@ -41,11 +41,11 @@ int	parse_map_file_line(char *line, t_map_data *data, t_parser *parser)
 		i++;
 	}
 	if (count == 6 && !found_all_identifiers(data) && ft_strlen(line) != 0)
-			return (put_error("Identifiers not found", 0));
+		return (put_error("Identifiers not found", 0));
 	return (add_line_to_map(line, data, parser));
 }
 
-static int 	found_all_identifiers(t_map_data *data)
+static int	found_all_identifiers(t_map_data *data)
 {
 	if (data->c_color == -1 || data->f_color == -1 || !data->no_tex \
 	|| !data->so_tex || !data->ea_tex || !data->we_tex)
@@ -90,11 +90,12 @@ static int	parse_color(char *line, t_id *id, t_map_data *data)
 	if (!color_array)
 		return (put_error("Error splitting color string", 0));
 	if (color_array[3])
-		return (free_array(color_array), put_error("Invalid Color Format", 0));
+		return (free_string_array(color_array), \
+		put_error("Invalid Color Format", 0));
 	r = atoi(color_array[0]);
 	g = atoi(color_array[1]);
 	b = atoi(color_array[2]);
-	free_array(color_array);
+	free_string_array(color_array);
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
 		return (put_error("Color values out of range", 0));
 	color = (r << 24) | (g << 16) | b << 8 | 255;

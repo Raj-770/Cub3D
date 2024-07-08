@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:00:55 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/07/08 11:10:47 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/07/08 13:04:33 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ int	check_map_rules(t_map_data *data)
 	int		len;
 
 	if (!check_map_characters(data))
-		return (put_error("Invalid Map!", 0));
+		return (0);
 	dup_map = duplicate_string_array(data->map);
 	if (!flood_fill(data, data->start_px, data->start_py, '-'))
 	{
 		free_string_array(dup_map);
-		return(put_error("Invalid Map!", 0));
+		return (put_error("Invalid Map!", 0));
 	}
 	reset_map(data, dup_map);
 	i = 0;
@@ -104,7 +104,8 @@ static bool	flood_fill(t_map_data *data, int x, int y, char c)
 	bool	left;
 	bool	right;
 
-	if (y < 0 || y >= data->map_height || x < 0 || x >= (int)ft_strlen(data->map[y]))
+	if (y < 0 || y >= data->map_height || x < 0 || \
+	x >= (int)ft_strlen(data->map[y]))
 		return (false);
 	if (data->map[y][x] && (data->map[y][x] == '1' || data->map[y][x] == c))
 		return (true);
