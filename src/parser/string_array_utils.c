@@ -6,13 +6,13 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 10:17:30 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/07/08 12:35:17 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/07/08 13:44:36 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-char	**duplicate_string_array(char **array)
+char	**duplicate_string_array(char **array, int size)
 {
 	char	**dup_array;
 	int		len;
@@ -20,7 +20,7 @@ char	**duplicate_string_array(char **array)
 
 	if (!array)
 		return (NULL);
-	len = string_array_length(array);
+	len = size;
 	dup_array = ft_calloc(1, (len + 1) * sizeof(char *));
 	if (!dup_array)
 		return (NULL);
@@ -50,14 +50,4 @@ void	free_string_array(char **str)
 	}
 	free(str);
 	str = NULL;
-}
-
-int	string_array_length(char **array)
-{
-	int	length;
-
-	length = 0;
-	while (array[length] != NULL)
-		length++;
-	return (length);
 }

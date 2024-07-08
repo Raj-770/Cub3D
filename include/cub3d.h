@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:26:50 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/07/08 10:56:35 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/07/08 13:43:42 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,9 +155,8 @@ int			ft_pixel(int r, int g, int b, int a);
 double		fix_ang(double ang);
 
 // String array Utils
-char		**duplicate_string_array(char **array);
+char		**duplicate_string_array(char **array, int size);
 void		free_string_array(char **str);
-int			string_array_length(char **array);
 
 
 // Init

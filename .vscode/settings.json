@@ -7,6 +7,8 @@
 		"cstring": "c",
 		"locale": "c",
 		"string": "c",
-		"vector": "c"
+		"vector": "c",
+		"__tuple": "c",
+		"array": "c"
 	}
 }

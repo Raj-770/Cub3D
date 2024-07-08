@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 15:00:55 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/07/08 13:04:33 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/07/08 13:43:25 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	check_map_rules(t_map_data *data)
 
 	if (!check_map_characters(data))
 		return (0);
-	dup_map = duplicate_string_array(data->map);
+	dup_map = duplicate_string_array(data->map, data->map_height);
 	if (!flood_fill(data, data->start_px, data->start_py, '-'))
 	{
 		free_string_array(dup_map);
@@ -41,6 +41,7 @@ int	check_map_rules(t_map_data *data)
 		i++;
 	}
 	free_string_array(dup_map);
+
 	return (1);
 }
 

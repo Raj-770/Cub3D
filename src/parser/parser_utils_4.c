@@ -6,7 +6,7 @@
 /*   By: rpambhar <rpambhar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:55:26 by rpambhar          #+#    #+#             */
-/*   Updated: 2024/07/06 14:15:15 by rpambhar         ###   ########.fr       */
+/*   Updated: 2024/07/08 13:29:02 by rpambhar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ int	convert_images(t_map_data *data)
 	free(temp);
 	if (!data->no_tex || !data->so_tex || !data->ea_tex || !data->we_tex)
 		return (0);
+
 	return (1);
 }
